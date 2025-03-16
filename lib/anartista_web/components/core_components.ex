@@ -622,10 +622,6 @@ defmodule AnartistaWeb.CoreComponents do
     """
   end
 
-  defp name_to_heroicon(name) do
-    "Heroicons.#{Phoenix.Naming.camelize(name)}"
-  end
-
   ## JS Commands
 
   def show(js \\ %JS{}, selector) do

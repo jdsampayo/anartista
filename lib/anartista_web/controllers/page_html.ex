@@ -6,5 +6,7 @@ defmodule AnartistaWeb.PageHTML do
   """
   use AnartistaWeb, :html
 
+  import AnartistaWeb.ArtComponents
+
   embed_templates "page_html/*"
 end

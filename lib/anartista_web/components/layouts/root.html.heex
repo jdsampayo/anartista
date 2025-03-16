@@ -7,7 +7,11 @@
     <.live_title suffix=" · AnArtista">
       <%= assigns[:page_title] || "Arte & Mosaico" %>
     </.live_title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" />
+    <link rel="icon" href={~p"/images/favicon.svg"} type="image/svg+xml"/>
+    <link rel="alternate icon" href={~p"/favicon.ico"}/>
+    <link rel="apple-touch-icon" href={~p"/images/apple-touch-icon.png"}/>
+    <link rel="stylesheet" href="https://fonts.adobe.com/fonts/mozaic-variable?vf-instance=Regular&vf-font-size=100&vf-font=MozaicGEOVariable-Regular" />
+    <link phx-track-static rel="stylesheet" href={~p"/fonts/classic_mosaic.css"} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}></script>
   </head>

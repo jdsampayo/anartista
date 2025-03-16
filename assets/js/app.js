@@ -43,3 +43,5 @@ liveSocket.connect()
 window.liveSocket = liveSocket
 
 import "./mosaic";
+
+import "./lightbox";
