@@ -43,16 +43,24 @@ const initMosaicAnimation = () => {
   }
 };
 
+// Mobile adds scrollbars when you scroll which changes size, useful to ignore those changes
+let lastWidth = window.innerWidth;
+
 document.addEventListener('DOMContentLoaded', () => {
   initMosaicAnimation();
+  lastWidth = window.innerWidth;
 });
 
+
 window.addEventListener('resize', () => {
-  // Debounce to avoid executing too many times
-  clearTimeout(window.resizeTimer);
-  window.resizeTimer = setTimeout(() => {
-    initMosaicAnimation();
-  }, 250);
+  if (window.innerWidth !== lastWidth) {
+    // Debounce to avoid executing too many times
+    clearTimeout(window.resizeTimer);
+    window.resizeTimer = setTimeout(() => {
+      initMosaicAnimation();
+      lastWidth = window.innerWidth;
+    }, 250);
+  }
 });
 
 export default { initMosaicAnimation };
