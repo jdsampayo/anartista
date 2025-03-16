@@ -8,7 +8,7 @@ erl_crash.dump
 *.beam
 /config/*.secret.exs
 .elixir_ls/
-/priv/static/
+/priv/static/assets
 /tmp
 /node_modules
 /assets/node_modules
