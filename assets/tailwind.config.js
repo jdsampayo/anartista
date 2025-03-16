@@ -5,6 +5,13 @@ const plugin = require("tailwindcss/plugin")
 const fs = require("fs")
 const path = require("path")
 
+
+// fondo: #a23a61
+// subfondo / acento: #688f96
+// primario: #e26575
+// secundario: #f0b5bd
+// terciario / ligero: #d4c9c7
+
 module.exports = {
   content: [
     "./js/**/*.js",
@@ -14,8 +21,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: "#FD4F00",
-      }
+        'primary': '#e26575',
+        'secondary': '#f0b5bd',
+        'light': '#dcdcd7',
+        'dark': '#d598a0', 
+        'accent': '#dcdcd7',
+        'cement': '#ded9ca',
+        'background': '#594d3d',
+        'white': '#E8E6E1',
+      },
+      fontFamily: {
+        'sans': ['Arial', 'sans-serif'],
+        'serif': ['Georgia', 'serif'],
+        'mosaic': ["ClassicMosaic"],
+      },
     },
   },
   plugins: [

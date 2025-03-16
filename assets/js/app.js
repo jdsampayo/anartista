@@ -42,3 +42,6 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+import "./mosaic";
+
+import "./lightbox";

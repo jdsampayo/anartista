@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="[scrollbar-gutter:stable]">
+<html lang="es" class="h-full">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title default="Anartista" suffix=" · Phoenix Framework">
-      {assigns[:page_title]}
+    <.live_title suffix=" · AnArtista">
+      <%= assigns[:page_title] || "Arte & Mosaico" %>
     </.live_title>
+    <link rel="icon" href={~p"/images/favicon.svg"} type="image/svg+xml"/>
+    <link rel="alternate icon" href={~p"/favicon.ico"}/>
+    <link rel="apple-touch-icon" href={~p"/images/apple-touch-icon.png"}/>
+    <link rel="stylesheet" href="https://fonts.adobe.com/fonts/mozaic-variable?vf-instance=Regular&vf-font-size=100&vf-font=MozaicGEOVariable-Regular" />
+    <link phx-track-static rel="stylesheet" href={~p"/fonts/classic_mosaic.css"} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
-    </script>
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}></script>
   </head>
-  <body class="bg-white">
-    {@inner_content}
+  <body class="bg-light h-full antialiased">
+    <%= @inner_content %>
   </body>
 </html>
