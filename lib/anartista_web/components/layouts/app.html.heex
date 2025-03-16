@@ -1,32 +1,44 @@
-<header class="px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
-    <div class="flex items-center gap-4">
-      <a href="/">
-        <img src={~p"/images/logo.svg"} width="36" />
-      </a>
-      <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
-        v{Application.spec(:phoenix, :vsn)}
-      </p>
-    </div>
-    <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <a href="https://twitter.com/elixirphoenix" class="hover:text-zinc-700">
-        @elixirphoenix
-      </a>
-      <a href="https://github.com/phoenixframework/phoenix" class="hover:text-zinc-700">
-        GitHub
-      </a>
-      <a
-        href="https://hexdocs.pm/phoenix/overview.html"
-        class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
-      >
-        Get Started <span aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
+<header class="bg-dark py-5 fixed w-full top-0 z-50">
+  <div class="container mx-auto px-4 flex justify-between items-center">
+    <a href="/" class="font-serif text-4xl font-bold text-light no-underline">
+      An<span class="text-primary">Artista</span>
+    </a>
+    <nav class="hidden md:block">
+      <ul class="flex">
+        <li class="ml-8"><a href="#about" class="text-light no-underline font-medium transition duration-300 hover:text-primary">Acerca de</a></li>
+        <li class="ml-8"><a href="#art" class="text-light no-underline font-medium transition duration-300 hover:text-primary">Arte</a></li>
+        <li class="ml-8"><a href="#mosaic" class="text-light no-underline font-medium transition duration-300 hover:text-primary">Mosaico</a></li>
+        <li class="ml-8"><a href="#contact" class="text-light no-underline font-medium transition duration-300 hover:text-primary">Contacto</a></li>
+      </ul>
+    </nav>
   </div>
 </header>
-<main class="px-4 py-20 sm:px-6 lg:px-8">
-  <div class="mx-auto max-w-2xl">
-    <.flash_group flash={@flash} />
-    {@inner_content}
-  </div>
+
+<main>
+  <%= @inner_content %>
 </main>
+
+<footer class="bg-dark text-light py-8 text-center">
+  <div class="container mx-auto px-4">
+    <p class="mb-5">© 2025 AnArtista. Todos los derechos reservados.</p>
+    <div class="flex justify-center gap-5 mb-5">
+      <a href="#" class="text-light transition duration-300 hover:text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </a>
+      <a href="#" class="text-light transition duration-300 hover:text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905a3.61 3.61 0 01-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+        </svg>
+      </a>
+      <a href="#" class="text-light transition duration-300 hover:text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+      </a>
+    </div>
+    <p class="text-sm opacity-70">Diseño y Concepto: AnArtista.com</p>
+  </div>
+</footer>

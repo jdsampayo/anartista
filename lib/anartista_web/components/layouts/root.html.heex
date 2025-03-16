@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" class="[scrollbar-gutter:stable]">
+<html lang="es" class="h-full">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title default="Anartista" suffix=" · Phoenix Framework">
-      {assigns[:page_title]}
+    <.live_title suffix=" · AnArtista">
+      <%= assigns[:page_title] || "Arte & Mosaico" %>
     </.live_title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
-    </script>
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}></script>
   </head>
-  <body class="bg-white">
-    {@inner_content}
+  <body class="bg-light h-full antialiased">
+    <%= @inner_content %>
   </body>
 </html>

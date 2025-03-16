@@ -18,6 +18,9 @@ defmodule AnartistaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/about", PageController, :about
+    get "/art", PageController, :art
+    get "/contact", PageController, :contact
   end
 
   # Other scopes may use custom stacks.

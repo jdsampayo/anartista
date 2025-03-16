@@ -2,8 +2,18 @@ defmodule AnartistaWeb.PageController do
   use AnartistaWeb, :controller
 
   def home(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
-    render(conn, :home, layout: false)
+    render(conn, :home)
+  end
+
+  def about(conn, _params) do
+    render(conn, :about)
+  end
+
+  def art(conn, _params) do
+    render(conn, :art)
+  end
+
+  def contact(conn, _params) do
+    render(conn, :contact)
   end
 end

@@ -14,8 +14,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: "#FD4F00",
-      }
+        'primary': '#e63946',
+        'secondary': '#457b9d',
+        'light': '#f1faee',
+        'dark': '#1d3557',
+        'accent': '#a8dadc',
+      },
+      fontFamily: {
+        'sans': ['Montserrat', 'sans-serif'],
+        'serif': ['"Playfair Display"', 'serif'],
+      },
     },
   },
   plugins: [
