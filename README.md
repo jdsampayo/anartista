@@ -1,18 +1,25 @@
 # Anartista
 
-To start your Phoenix server:
+Personal website for https://anartista.com
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+## Deploy
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+```sh
+cd ~/apps/anartista
+git pull
+mix deps.get --only prod
+MIX_ENV=prod mix compile
+MIX_ENV=prod mix assets.deploy
+MIX_ENV=prod mix release
+sudo systemctl restart anartista
+```
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Check errors
 
-## Learn more
+```sh
+journalctl -u anartista.service -n 50
+```
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
