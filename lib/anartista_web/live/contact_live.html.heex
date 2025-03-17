@@ -1,0 +1,28 @@
+<%= if @submitted do %>
+<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6" role="alert">
+    <strong class="font-bold">¡Gracias por tu mensaje!</strong>
+    <p class="block sm:inline">Nos pondremos en contacto contigo a la brevedad.</p>
+    <button phx-click="new_message" class="bg-primary text-light py-3 px-8 rounded font-bold transition duration-300 hover:bg-opacity-90 mt-4">
+    Enviar otro mensaje
+    </button>
+</div>
+<% else %>
+<.form for={@form} phx-submit="save" class="space-y-5">
+    <div class="mb-5">
+        <.input field={@form[:name]} label="Nombre" type="text" required />
+    </div>
+    <div class="mb-5">
+        <.input field={@form[:email]} label="Correo electrónico" type="email" required />
+    </div>
+    <div class="mb-5">
+        <.input field={@form[:subject]} label="Asunto" type="text" required />
+    </div>
+    <div class="mb-5">
+        <.input field={@form[:message]} label="Mensaje" type="textarea" required />
+    </div>
+    
+    <button type="submit" class="bg-primary text-light py-3 px-8 rounded font-bold transition duration-300 hover:bg-opacity-90">
+    Enviar mensaje
+    </button>
+</.form>
+<% end %>
