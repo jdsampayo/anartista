@@ -31,8 +31,8 @@ module.exports = {
         'white': '#E8E6E1',
       },
       fontFamily: {
-        'sans': ['Arial', 'sans-serif'],
-        'serif': ['Georgia', 'serif'],
+        'sans': ['Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', 'Segoe UI', 'Roboto', 'Noto Sans', 'sans-serif'],
+        'serif': ['Georgia', 'Times New Roman', 'Cambria', 'Palatino Linotype', 'Book Antiqua', 'Palatino', 'serif'],
         'mosaic': ["ClassicMosaic"],
       },
     },

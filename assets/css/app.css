@@ -3,6 +3,32 @@
 @import "tailwindcss/utilities";
 
 
+.gradient-text {
+  .pink {
+    color: #e26575;
+  }
+
+  .split {
+    position: relative;
+    display: inline-block;
+    color: #e26575;
+
+    &::after {
+      content: "A";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      overflow: hidden;
+      color: #dcdcd7;
+    }
+  }
+
+  .white {
+    color: #dcdcd7;
+  }
+}
+
 .mosaic-container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
