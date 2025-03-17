@@ -1,7 +1,6 @@
-# lib/anartista/contact.ex
 defmodule Anartista.Contact do
   @moduledoc """
-  Contexto para manejar los mensajes de contacto.
+  Context for handling contact messages.
   """
 
   import Ecto.Query, warn: false
@@ -9,9 +8,9 @@ defmodule Anartista.Contact do
   alias Anartista.Contact.Message
 
   @doc """
-  Devuelve la lista de mensajes de contacto.
+  Returns the list of contact messages.
 
-  ## Ejemplos
+  ## Examples
 
       iex> list_messages()
       [%Message{}, ...]
@@ -22,11 +21,11 @@ defmodule Anartista.Contact do
   end
 
   @doc """
-  Obtiene un único mensaje.
+  Gets a single message.
 
-  Genera `Ecto.NoResultsError` si el mensaje no existe.
+  Raises `Ecto.NoResultsError` if the message does not exist.
 
-  ## Ejemplos
+  ## Examples
 
       iex> get_message!(123)
       %Message{}
@@ -38,9 +37,9 @@ defmodule Anartista.Contact do
   def get_message!(id), do: Repo.get!(Message, id)
 
   @doc """
-  Crea un mensaje.
+  Creates a message.
 
-  ## Ejemplos
+  ## Examples
 
       iex> create_message(%{field: value})
       {:ok, %Message{}}
@@ -56,7 +55,7 @@ defmodule Anartista.Contact do
   end
 
   @doc """
-  Devuelve un changeset vacío para el formulario de contacto.
+  Returns an empty changeset for the contact form.
   """
   def change_message(%Message{} = message, attrs \\ %{}) do
     Message.changeset(message, attrs)

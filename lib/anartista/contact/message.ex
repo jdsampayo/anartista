@@ -1,4 +1,3 @@
-# lib/anartista/contact/message.ex
 defmodule Anartista.Contact.Message do
   use Ecto.Schema
   import Ecto.Changeset
