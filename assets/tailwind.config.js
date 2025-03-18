@@ -21,14 +21,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary': '#e26575',
-        'secondary': '#f0b5bd',
+        'primary': '#9ea531', // verde
+        'secondary': '#B5DDD1', // menta agua
         'light': '#dcdcd7',
-        'dark': '#d598a0', 
-        'accent': '#dcdcd7',
+        'dark': '#594d3d', // gris oscuro
+        'accent': '#121212',
         'cement': '#ded9ca',
-        'background': '#594d3d',
         'white': '#E8E6E1',
+        'green': '#9ea531'
       },
       fontFamily: {
         'sans': ['Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', 'Segoe UI', 'Roboto', 'Noto Sans', 'sans-serif'],
@@ -44,14 +44,14 @@ module.exports = {
     //
     //     <div class="phx-click-loading:animate-ping">
     //
-    plugin(({addVariant}) => addVariant("phx-click-loading", [".phx-click-loading&", ".phx-click-loading &"])),
-    plugin(({addVariant}) => addVariant("phx-submit-loading", [".phx-submit-loading&", ".phx-submit-loading &"])),
-    plugin(({addVariant}) => addVariant("phx-change-loading", [".phx-change-loading&", ".phx-change-loading &"])),
+    plugin(({ addVariant }) => addVariant("phx-click-loading", [".phx-click-loading&", ".phx-click-loading &"])),
+    plugin(({ addVariant }) => addVariant("phx-submit-loading", [".phx-submit-loading&", ".phx-submit-loading &"])),
+    plugin(({ addVariant }) => addVariant("phx-change-loading", [".phx-change-loading&", ".phx-change-loading &"])),
 
     // Embeds Heroicons (https://heroicons.com) into your app.css bundle
     // See your `CoreComponents.icon/1` for more information.
     //
-    plugin(function({matchComponents, theme}) {
+    plugin(function ({ matchComponents, theme }) {
       let iconsDir = path.join(__dirname, "../deps/heroicons/optimized")
       let values = {}
       let icons = [
@@ -63,11 +63,11 @@ module.exports = {
       icons.forEach(([suffix, dir]) => {
         fs.readdirSync(path.join(iconsDir, dir)).forEach(file => {
           let name = path.basename(file, ".svg") + suffix
-          values[name] = {name, fullPath: path.join(iconsDir, dir, file)}
+          values[name] = { name, fullPath: path.join(iconsDir, dir, file) }
         })
       })
       matchComponents({
-        "hero": ({name, fullPath}) => {
+        "hero": ({ name, fullPath }) => {
           let content = fs.readFileSync(fullPath).toString().replace(/\r?\n|\r/g, "")
           let size = theme("spacing.6")
           if (name.endsWith("-mini")) {
@@ -87,7 +87,7 @@ module.exports = {
             "height": size
           }
         }
-      }, {values})
+      }, { values })
     })
   ]
 }
