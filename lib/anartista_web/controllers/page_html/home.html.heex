@@ -2,12 +2,19 @@
 <section class="relative min-h-[700px] md:h-screen flex items-center justify-center overflow-hidden mt-0 sm:mt-10 py-16 md:py-0 bg-white" id="hero">
   <div class="mosaic-container" id="mosaic-animation"></div>
   <div class="relative z-10 text-center text-light max-w-4xl px-4">
-    <img class="mb-5 mt-0 sm:mt-5 animate-fade-in mx-auto max-w-[200px] sm:max-w-[250px] md:max-w-xs" src={~p"/images/flor.png"} alt="Construcción de mosaico en forma de flor" style="animation-delay: 2.5s;">
+    <img 
+      width="320"
+      height="315"
+      src={~p"/images/flor.webp"}
+      alt="Construcción de mosaico en forma de flor"
+      class="mb-5 mt-0 sm:mt-5 animate-fade-in mx-auto max-w-[200px] sm:max-w-[250px] md:max-w-xs"
+      style="animation-delay: 2.5s;"
+      srcset={"#{~p"/images/flor.webp"} 1x, #{~p"/images/flor@2x.png"} 2x"}
+    />
     <h1 class="bg-dark font-mosaic text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-4 md:mb-6 animate-fade-in p-3 md:p-4" style="animation-delay: 3s;">
       <span class="text-primary">A</span><span class="text-secondary">n</span><span class="text-primary">a</span> <span class="text-accent">Artist</span>a
     </h1>
     <p class="bg-dark text-lg sm:text-xl mb-6 md:mb-8 animate-fade-in p-3 md:p-4" style="animation-delay: 3.5s;">Explorando el arte y la belleza a través del mosaico, pintura, grabado y escultura</p>
-    <!-- <a href="#mosaic" class="inline-block bg-primary text-light py-2 px-6 md:py-3 md:px-8 rounded font-bold transition duration-300 hover:bg-opacity-90 animate-fade-in" style="animation-delay: 4s;">Descubre mis piezas</a> -->
   </div>
 </section>
 
@@ -23,7 +30,14 @@
         <p class="text-lg">A través de mis mosaicos, busco rescatar una técnica milenaria y darle un giro contemporáneo, creando piezas que dialogan entre la tradición y la vanguardia, lo permanente y lo efímero.</p>
       </div>
       <div class="flex-1 rounded-lg overflow-hidden shadow-xl">
-        <img src="/images/ana-studio.webp" alt="Ana trabajando en su estudio" class="w-full h-auto block">
+        <img 
+          width="728"
+          height="970"
+          src={~p"/images/ana-studio.webp"}
+          alt="Ana trabajando en su estudio"
+          class="w-full h-auto block"
+          srcset={"#{~p"/images/ana-studio.webp"} 1x, #{~p"/images/ana-studio@2x.png"} 2x"}
+        />
       </div>
     </div>
   </div>
@@ -38,29 +52,25 @@
       <.category_card 
         title="Pintura"
         description="Exploraciones cromáticas y texturales que juegan con la luz y la profundidad. Mi trabajo pictórico refleja mis inquietudes internas y mi diálogo con el entorno."
-        image_src="/images/portafolio/pintura.webp"
-        image_alt="Sin Título"
+        image_name="pintura"
       />
       
       <.category_card 
         title="Grabado"
         description="El arte de la impresión me permite explorar la reproducción y la unicidad, creando series que varían sutilmente entre sí, cuestionando el concepto de original."
-        image_src="/images/portafolio/grabado.webp"
-        image_alt="Somos Fruto"
+        image_name="grabado"
       />
       
       <.category_card 
         title="Escultura"
         description="Mis piezas tridimensionales desafían la gravedad y el espacio, invitando al espectador a rodear la obra y descubrir sus múltiples perspectivas."
-        image_src="/images/portafolio/escultura.webp"
-        image_alt="Sin Título"
+        image_name="escultura"
       />
       
       <.category_card 
         title="Dibujo"
         description="El trazo como lenguaje primordial, donde cada línea es una declaración de intenciones. Mis dibujos navegan entre monocromáticos y policromáticos, creando mundos entre lo figurativo y lo abstracto que invitan a una lectura íntima y contemplativa."
-        image_src="/images/portafolio/dibujo.webp"
-        image_alt="Sin Título"
+        image_name="dibujo"
       />
     </div>
   </div>
@@ -77,8 +87,8 @@
         <p class="text-lg">Utilizo teselas de diversos materiales como esmalte de porcelana, vidrio, cerámica, piedra y elementos reciclados para crear obras que juegan con la luz, el color y la textura. Mis mosaicos van desde piezas decorativas hasta instalaciones de gran formato, explorando tanto lo abstracto como lo figurativo.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
-        <.mosaic_gallery_item image_src="/images/mosaicos/1.webp" image_alt="Sin Título" title="Sin Título" />
-        <.mosaic_gallery_item image_src="/images/mosaicos/2.webp" image_alt="Homenaje a Emma Reyes y a mi mamá que me cobijó con su rebozo" title="Homenaje a Emma Reyes y a mi mamá que me cobijó con su rebozo" />
+        <.mosaic_gallery_item image_name="1" description="Flor" />
+        <.mosaic_gallery_item image_name="2" description="Homenaje a Emma Reyes y a mi mamá que me cobijó con su rebozo"/>
       </div>
     </div>
   </div>
@@ -93,7 +103,7 @@
       title="Mujeres Creadoras 2025: Cuidados"
       date="Marzo 2025"
       location="Ciudad de México"
-      image_src="/images/exposiciones/mujeres-creadoras-2025.jpeg"
+      image_name="mujeres-creadoras-2025"
       image_alt="Mujeres Creadoras 2025: Exposición sobre cuidados"
       description="Exposición que aborda los cuidados desde múltiples dimensiones y narrativas, desde el arte, la política, el encuentro y la compartición."
       link_url="https://www.mujerescreadoras.org/"
