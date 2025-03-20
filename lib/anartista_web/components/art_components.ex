@@ -13,7 +13,7 @@ defmodule AnartistaWeb.ArtComponents do
         height="256"
         data-hires={"/images/portafolio/#{@image_name}.webp"}
         src={"/images/portafolio/#{@image_name}_thumb.webp"}
-        srcset={"/images/portafolio/#{@image_name}_thumb.webp 1x, /images/portafolio/#{@image_name}_thumb@2x.png 2x"}
+        srcset={"/images/portafolio/#{@image_name}_thumb.webp 1x, /images/portafolio/#{@image_name}_thumb@2x.webp 2x"}
         alt={@title}
         class="w-full h-full object-cover transition duration-500 hover:scale-110 lightbox-trigger"
       />
@@ -36,7 +36,7 @@ defmodule AnartistaWeb.ArtComponents do
         height="488"
         data-hires={"/images/mosaicos/#{@image_name}.webp"}
         src={"/images/mosaicos/#{@image_name}_thumb.webp"}
-        srcset={"/images/mosaicos/#{@image_name}_thumb.webp 1x, /images/mosaicos/#{@image_name}_thumb@2x.png 2x"}
+        srcset={"/images/mosaicos/#{@image_name}_thumb.webp 1x, /images/mosaicos/#{@image_name}_thumb@2x.webp 2x"}
         alt={@description}
         class="absolute top-0 left-0 w-full h-full object-cover transition duration-500 hover:scale-110 lightbox-trigger"
       />
@@ -66,7 +66,7 @@ defmodule AnartistaWeb.ArtComponents do
           height="252"
           data-hires={"/images/exposiciones/#{@image_name}.webp"}
           src={"/images/exposiciones/#{@image_name}_thumb.webp"}
-          srcset={"/images/exposiciones/#{@image_name}_thumb.webp 1x, /images/exposiciones/#{@image_name}_thumb@2x.png 2x"}
+          srcset={"/images/exposiciones/#{@image_name}_thumb.webp 1x, /images/exposiciones/#{@image_name}_thumb@2x.webp 2x"}
           alt={@image_alt}
           class="absolute inset-0 w-full h-full object-cover transition duration-500 hover:scale-110 lightbox-trigger"
         />
