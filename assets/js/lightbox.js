@@ -63,7 +63,8 @@ const initLightbox = () => {
   const images = document.querySelectorAll('.lightbox-trigger');
   images.forEach(img => {
     img.addEventListener('click', () => {
-      openLightbox(img.src, img.alt);
+      const imageSource = img.getAttribute('data-hires') || img.src;
+      openLightbox(imageSource, img.alt);
     });
   });
 };
