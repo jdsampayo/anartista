@@ -51,6 +51,7 @@ defmodule AnartistaWeb.ArtComponents do
   attr :subtitle, :string, default: nil
   attr :date, :string, required: true
   attr :location, :string, required: true
+  attr :opening, :string, required: true
   attr :image_name, :string, required: true
   attr :image_alt, :string, required: true
   attr :description, :string, required: true
@@ -90,6 +91,12 @@ defmodule AnartistaWeb.ArtComponents do
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <%= @location %>
+            </span>
+            <span class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <%= @opening %>
             </span>
           </div>
         </div>
