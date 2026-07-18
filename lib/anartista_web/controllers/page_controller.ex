@@ -2,7 +2,7 @@ defmodule AnartistaWeb.PageController do
   use AnartistaWeb, :controller
 
   def home(conn, _params) do
-    render(conn, :home)
+    render(conn, :home, substack_posts: Anartista.Substack.posts(3))
   end
 
   def about(conn, _params) do
