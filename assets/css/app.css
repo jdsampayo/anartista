@@ -54,7 +54,7 @@
 .mosaic-tile {
   background-color: rgba(255, 255, 255, 0.1);
   transform: scale(0);
-  animation: appearTile 0.5s forwards;
+  animation: appearTile 0.25s forwards;
   opacity: 0;
   border-radius: 2px;
   box-shadow:

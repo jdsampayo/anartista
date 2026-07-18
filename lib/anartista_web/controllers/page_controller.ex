@@ -16,4 +16,8 @@ defmodule AnartistaWeb.PageController do
   def contact(conn, _params) do
     render(conn, :contact)
   end
+
+  def shop(conn, _params) do
+    render(conn, :shop)
+  end
 end
