@@ -2,7 +2,7 @@
 <section class="relative min-h-[700px] md:h-screen flex items-center justify-center overflow-hidden mt-0 sm:mt-10 py-16 md:py-0 bg-white" id="hero">
   <div class="mosaic-container" id="mosaic-animation"></div>
   <div class="relative z-10 text-center text-light max-w-4xl px-4">
-    <img 
+    <img
       width="320"
       height="315"
       src={~p"/images/flor.webp"}
@@ -31,7 +31,7 @@
         <p class="text-lg">Trabajo con las manos en la tierra y los ojos en el horizonte, buscando ese punto donde la herencia cultural mexicana se encuentra con preguntas universales. Mi arte no ofrece respuestas, sino que teje puentes entre lo permanente y lo efímero, invitando a contemplar el mundo como un gran mosaico en constante recomposición.</p>
       </div>
       <div class="flex-1 rounded-lg overflow-hidden shadow-xl">
-        <img 
+        <img
           width="728"
           height="970"
           src={~p"/images/ana-studio.webp"}
@@ -49,26 +49,26 @@
   <div class="container mx-auto px-4">
     <h2 class="font-serif text-4xl text-center mb-12 text-light relative after:content-[''] after:absolute after:bottom-[-15px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-secondary">Arte</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-      
-      <.category_card 
+
+      <.category_card
         title="Pintura"
         description="Exploraciones cromáticas y texturales que juegan con la luz y la profundidad. Mi trabajo pictórico refleja mis inquietudes internas y mi diálogo con el entorno."
         image_name="pintura"
       />
-      
-      <.category_card 
+
+      <.category_card
         title="Grabado"
         description="El arte de la impresión me permite explorar la reproducción y la unicidad, creando series que varían sutilmente entre sí, cuestionando el concepto de original."
         image_name="grabado"
       />
-      
-      <.category_card 
+
+      <.category_card
         title="Escultura"
         description="Mis piezas tridimensionales desafían la gravedad y el espacio, invitando al espectador a rodear la obra y descubrir sus múltiples perspectivas."
         image_name="escultura"
       />
-      
-      <.category_card 
+
+      <.category_card
         title="Dibujo"
         description="El trazo como lenguaje primordial, donde cada línea es una declaración de intenciones. Mis dibujos navegan entre monocromáticos y policromáticos, creando mundos entre lo figurativo y lo abstracto que invitan a una lectura íntima y contemplativa."
         image_name="dibujo"
@@ -95,11 +95,32 @@
   </div>
 </section>
 
+<section :if={@substack_posts != []} class="py-24 bg-dark text-light" id="writing">
+  <div class="container mx-auto px-4">
+    <h2 class="font-serif text-4xl text-center mb-12 text-light relative after:content-[''] after:absolute after:bottom-[-15px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-secondary">
+      Escritos
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <.writing_card :for={post <- @substack_posts} post={post} />
+    </div>
+    <div class="text-center mt-12">
+      <a
+        href="https://apalvarezvega.substack.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block border-2 border-secondary text-secondary hover:bg-secondary hover:text-dark font-semibold py-3 px-8 rounded transition"
+      >
+        Ver todos los escritos
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- Exhibitions -->
 <section class="py-24 bg-accent/20" id="exhibitions">
   <div class="container mx-auto px-4">
     <h2 class="font-serif text-4xl text-center mb-16 text-dark relative after:content-[''] after:absolute after:bottom-[-15px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-secondary">Exposiciones</h2>
-    
+
     <.exhibition_card
       title="Universos Personales: Primera Exposición"
       date="26 de marzo a 28 de abril 2025"
@@ -122,7 +143,7 @@
       link_url="https://www.mujerescreadoras.org/"
       link_text="Enlace externo"
     />
-    
+
   </div>
 </section>
 

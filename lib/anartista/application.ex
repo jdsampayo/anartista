@@ -17,7 +17,8 @@ defmodule Anartista.Application do
       # Start a worker by calling: Anartista.Worker.start_link(arg)
       # {Anartista.Worker, arg},
       # Start to serve requests, typically the last entry
-      AnartistaWeb.Endpoint
+      AnartistaWeb.Endpoint,
+      Anartista.Substack
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

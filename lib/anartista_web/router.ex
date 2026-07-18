@@ -21,7 +21,7 @@ defmodule AnartistaWeb.Router do
     get("/about", PageController, :about)
     get("/art", PageController, :art)
     get("/contact", PageController, :contact)
-    # get "/shop", PageController, :shop
+    # get("/shop", PageController, :shop)
   end
 
   # Other scopes may use custom stacks.

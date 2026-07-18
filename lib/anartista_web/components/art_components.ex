@@ -1,9 +1,10 @@
 defmodule AnartistaWeb.ArtComponents do
   use Phoenix.Component
 
-  attr :title, :string, required: true
-  attr :description, :string, required: true
-  attr :image_name, :string, required: true
+  attr(:title, :string, required: true)
+  attr(:description, :string, required: true)
+  attr(:image_name, :string, required: true)
+
   def category_card(assigns) do
     ~H"""
     <div class="bg-white bg-opacity-10 rounded-lg overflow-hidden transition transform duration-300 hover:-translate-y-2">
@@ -26,8 +27,9 @@ defmodule AnartistaWeb.ArtComponents do
     """
   end
 
-  attr :image_name, :string, required: true
-  attr :description, :string, required: true
+  attr(:image_name, :string, required: true)
+  attr(:description, :string, required: true)
+
   def mosaic_gallery_item(assigns) do
     ~H"""
     <div class="rounded-lg overflow-hidden shadow-md relative pt-[100%] group">
@@ -47,16 +49,16 @@ defmodule AnartistaWeb.ArtComponents do
     """
   end
 
-  attr :title, :string, required: true
-  attr :subtitle, :string, default: nil
-  attr :date, :string, required: true
-  attr :location, :string, required: true
-  attr :opening, :string, required: true
-  attr :image_name, :string, required: true
-  attr :image_alt, :string, required: true
-  attr :description, :string, required: true
-  attr :link_url, :string, default: nil
-  attr :link_text, :string, default: "Visitar sitio"
+  attr(:title, :string, required: true)
+  attr(:subtitle, :string, default: nil)
+  attr(:date, :string, required: true)
+  attr(:location, :string, required: true)
+  attr(:opening, :string, required: true)
+  attr(:image_name, :string, required: true)
+  attr(:image_alt, :string, required: true)
+  attr(:description, :string, required: true)
+  attr(:link_url, :string, default: nil)
+  attr(:link_text, :string, default: "Visitar sitio")
 
   def exhibition_card(assigns) do
     ~H"""
@@ -113,6 +115,39 @@ defmodule AnartistaWeb.ArtComponents do
         <% end %>
       </div>
     </div>
+    """
+  end
+
+  attr(:post, :map, required: true)
+
+  def writing_card(assigns) do
+    ~H"""
+    <a
+      href={@post.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="block bg-white rounded-lg shadow-lg overflow-hidden transition transform duration-300 hover:-translate-y-2 group"
+    >
+      <div :if={@post.image != ""} class="h-48 overflow-hidden">
+        <img
+          src={@post.image}
+          alt={@post.title}
+          loading="lazy"
+          class="w-full h-full object-cover transition duration-500 group-hover:scale-110"
+        />
+      </div>
+      <div class="p-6">
+        <p class="text-sm text-dark/60 mb-2"><%= @post.pub_date %></p>
+        <h3 class="font-serif text-2xl mb-3 text-primary"><%= @post.title %></h3>
+        <p class="text-dark/80 text-sm mb-4"><%= @post.description %></p>
+        <span class="inline-flex items-center text-primary font-semibold text-sm">
+          Leer en Substack
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </span>
+      </div>
+    </a>
     """
   end
 end
