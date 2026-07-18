@@ -103,7 +103,7 @@ defmodule AnartistaWeb.ArtComponents do
         <p class="text-dark/80 mb-6 flex-grow"><%= @description %></p>
         <%= if @link_url do %>
           <div class="mt-auto">
-            <a href={@link_url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-primary hover:text-primary/80 font-semibold transition">
+            <a href={@link_url} aria-label={@image_alt} target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-primary hover:text-primary/80 font-semibold transition">
               <%= @link_text %>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

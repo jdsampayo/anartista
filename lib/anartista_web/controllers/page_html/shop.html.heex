@@ -1,0 +1,102 @@
+<!-- Hero -->
+<section class="py-20 bg-dark text-light text-center">
+  <h1 class="font-serif text-5xl md:text-6xl mb-4 mt-8">
+    <span class="text-primary">Ti</span><span class="text-secondary">en</span><span class="text-primary">da</span>
+  </h1>
+  <p class="text-lg max-w-xl mx-auto text-light/80">
+    Artesanía hecha a mano en Ciudad de México. Cada pieza es única,
+    creada con materiales seleccionados y mucho cuidado.
+  </p>
+  <p class="mt-4 text-sm text-light/60">
+    ¿Te interesa alguna pieza?
+    <a href="/contact" class="text-primary underline hover:text-secondary transition-colors">Escríbeme</a>
+    o al Instagram <a href="https://instagram.com/apalvarezvega" class="text-primary underline hover:text-secondary" target="_blank">@apalvarezvega</a>
+  </p>
+</section>
+
+<!-- Catálogo -->
+<section class="py-16 bg-light">
+  <div class="container mx-auto px-4 max-w-6xl space-y-16">
+
+    <!-- ── Aretes ────────────────────────────────────── -->
+    <div>
+      <.category_heading title="Aretes" />
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+
+        <.product_card
+          name="Aretes Flor de Talavera"
+          price={380}
+          category="Aretes"
+          image="arete_1"
+          description="Cerámica con esmalte, colgantes largos. Peso ligero."
+        />
+
+        <.product_card
+          name="Aretes Luna Tejida"
+          price={290}
+          category="Aretes"
+          image="arete_2"
+          description="Hilo de seda y semillas. Cierre de plata 950."
+        />
+
+        <.product_card
+          name="Aretes Mosaico Turquesa"
+          price={450}
+          category="Aretes"
+          image="arete_3"
+          description="Mini mosaico de teselas de vidrio. Pieza única."
+          sold_out={true}
+        />
+
+        <.product_card
+          name="Aretes Geométrico Cobre"
+          price={320}
+          category="Aretes"
+          image="arete_4"
+          description="Lámina de cobre oxidada a mano. Aros medianos."
+        />
+
+      </div>
+    </div>
+
+    <!-- ── Collares ───────────────────────────────────── -->
+    <div>
+      <.category_heading title="Collares" />
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+
+        <.product_card
+          name="Collar Semillas del Bosque"
+          price={520}
+          category="Collar"
+          image="collar_1"
+          description="Semillas naturales y cuenta de barro negro. Largo 45 cm."
+        />
+
+        <.product_card
+          name="Collar Cascada Azul"
+          price={680}
+          category="Collar"
+          image="collar_2"
+          description="Cristal checo, miyuki y cierre de plata. Largo 38 cm."
+        />
+        
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA contacto al final -->
+<section class="py-14 bg-accent/10 text-center">
+  <p class="font-serif text-2xl text-dark mb-3">¿Quieres encargar una pieza personalizada?</p>
+  <p class="text-gray-500 mb-6 max-w-md mx-auto">
+    Puedo crear aretes y collares con los colores, materiales o motivos
+    que quieras. Envíame un mensaje y lo platicamos.
+  </p>
+  <a
+    href="/contact"
+    class="inline-block bg-primary text-light px-8 py-3 rounded-full font-semibold hover:bg-secondary transition-colors duration-200"
+  >
+    Contáctame
+  </a>
+</section>

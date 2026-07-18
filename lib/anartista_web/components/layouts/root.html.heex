@@ -4,14 +4,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <meta name="description" content="Ana Artista - Artista mexicana explorando el arte y la belleza a través del mosaico, pintura, grabado y escultura. Creaciones que combinan tradición y vanguardia con pasión y rebeldía." />
-    <.live_title suffix=" · AnArtista">
-      <%= assigns[:page_title] || "Arte & Mosaico" %>
+
+    <%
+      page_title = assigns[:page_title] || "AnArtista"
+      meta_description = assigns[:meta_description] || "Artista mexicana explora arte y belleza en mosaico, pintura y escultura. Tradición y vanguardia con pasión rebelde."
+      meta_image = assigns[:meta_image] || "https://anartista.com" <> ~p"/images/apple-touch-icon.png"
+      og_url = assigns[:og_url] || "https://anartista.com/"
+    %>
+
+    <.live_title suffix=" - Arte y Mosaico">
+      <%= page_title %>
     </.live_title>
+
+    <meta name="description" content={meta_description} />
+    <meta itemprop="image" content={meta_image} />
+
+    <meta property="og:url" content={og_url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={page_title} />
+    <meta property="og:description" content={meta_description} />
+    <meta property="og:image" content={meta_image} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={page_title} />
+    <meta name="twitter:description" content={meta_description} />
+    <meta name="twitter:image" content={meta_image} />
+
     <link rel="icon" href={~p"/images/favicon.svg"} type="image/svg+xml"/>
     <link rel="alternate icon" href={~p"/favicon.ico"}/>
     <link rel="apple-touch-icon" href={~p"/images/apple-touch-icon.png"}/>
-    <link rel="stylesheet" href="https://fonts.adobe.com/fonts/mozaic-variable?vf-instance=Regular&vf-font-size=100&vf-font=MozaicGEOVariable-Regular" />
     <link phx-track-static rel="stylesheet" href={~p"/fonts/classic_mosaic.css"} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}></script>
