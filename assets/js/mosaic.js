@@ -1,66 +1,132 @@
-const initMosaicAnimation = () => {
-  const mosaicContainer = document.getElementById('mosaic-animation');
-  if (!mosaicContainer) return;
+import MosaicPlugin from "../vendor/mosaic-plugin.js";
 
-  const colors = [
-    '#9ea531', // Verde Lima
-    '#121212', // Negro
-    '#B5DDD1', // Menta/Agua
-    '#ded9ca'  // Gris Cemento
-  ];
+const SOURCE_URL = "/images/background.webp";
+const MAX_RENDER_PIXELS = 8_000_000;
+const MOSAIC_SEED = 20_250_802;
 
-  let rows, cols;
+let activeAnimation = null;
+let renderVersion = 0;
+let resizeTimer = null;
+let sourceImagePromise = null;
 
-  if (window.innerWidth < 640) {
-    // Mobile
-    rows = 8;
-    cols = 6;
-  } else if (window.innerWidth < 1024) {
-    // Tablet
-    rows = 8;
-    cols = 10;
-  } else {
-    // Desktop
-    rows = 10;
-    cols = 15;
-  }
+const loadSourceImage = () => {
+  if (sourceImagePromise) return sourceImagePromise;
 
-  const totalTiles = rows * cols;
+  sourceImagePromise = new Promise((resolve, reject) => {
+    const image = new Image();
+    image.decoding = "async";
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error(`Could not load ${SOURCE_URL}`));
+    image.src = SOURCE_URL;
 
-  mosaicContainer.innerHTML = '';
+    if (image.complete && image.naturalWidth > 0) resolve(image);
+  });
 
-  for (let i = 0; i < totalTiles; i++) {
-    const tile = document.createElement('div');
-    tile.className = 'mosaic-tile';
+  return sourceImagePromise;
+};
 
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    tile.style.backgroundColor = randomColor;
+const createCoverCanvas = (image, width, height) => {
+  const deviceScale = Math.min(window.devicePixelRatio || 1, 2);
+  const pixelScale = Math.min(
+    deviceScale,
+    Math.sqrt(MAX_RENDER_PIXELS / (width * height))
+  );
+  const canvas = document.createElement("canvas");
+  const canvasWidth = Math.max(1, Math.round(width * pixelScale));
+  const canvasHeight = Math.max(1, Math.round(height * pixelScale));
+  const drawScale = Math.max(
+    canvasWidth / image.naturalWidth,
+    canvasHeight / image.naturalHeight
+  );
+  const drawWidth = image.naturalWidth * drawScale;
+  const drawHeight = image.naturalHeight * drawScale;
+  const context = canvas.getContext("2d", { alpha: false });
 
-    const delay = Math.random() * 3;
-    tile.style.animationDelay = `${delay}s`;
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+  context.drawImage(
+    image,
+    (canvasWidth - drawWidth) / 2,
+    (canvasHeight - drawHeight) / 2,
+    drawWidth,
+    drawHeight
+  );
 
-    mosaicContainer.appendChild(tile);
+  return { canvas, pixelScale };
+};
+
+const renderMosaic = async () => {
+  const container = document.getElementById("mosaic-animation");
+  if (!container) return;
+
+  const version = ++renderVersion;
+  const { width, height } = container.getBoundingClientRect();
+  if (width < 1 || height < 1) return;
+
+  activeAnimation?.cancel();
+  activeAnimation = null;
+
+  try {
+    const image = await loadSourceImage();
+    if (version !== renderVersion) return;
+
+    const { canvas: sourceCanvas, pixelScale } = createCoverCanvas(image, width, height);
+    const areaScale = pixelScale * pixelScale;
+    const mosaic = new MosaicPlugin({
+      image: sourceCanvas,
+      algorithm: "stained-glass",
+      edgeStrength: 0.5,
+      voronoiRelaxation: 4,
+      maxColors: 256,
+      minTileArea: 50 * areaScale,
+      maxTileArea: 200 * areaScale,
+      maxSides: 7,
+      borderColor: "#2d241b",
+      borderWidth: 1,
+      seed: MOSAIC_SEED,
+      yieldEveryMs: 10
+    });
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const animation = await mosaic.animate({
+      duration: 2_400,
+      order: "radial",
+      from: "transparent",
+      easing: (progress) => 1 - Math.pow(1 - progress, 4),
+      seed: MOSAIC_SEED
+    });
+
+    if (version !== renderVersion) {
+      animation.cancel();
+      return;
+    }
+
+    animation.canvas.className = "hero-mosaic-canvas";
+    animation.canvas.setAttribute("aria-hidden", "true");
+    container.replaceChildren(animation.canvas);
+    activeAnimation = animation;
+
+    if (reducedMotion) {
+      animation.seek(1);
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      if (version === renderVersion) animation.play().catch(console.warn);
+    });
+  } catch (error) {
+    if (version === renderVersion) {
+      container.replaceChildren();
+      console.warn("Hero mosaic could not be rendered.", error);
+    }
   }
 };
 
-// Mobile adds scrollbars when you scroll which changes size, useful to ignore those changes
-let lastWidth = window.innerWidth;
+const scheduleRender = () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(renderMosaic, 250);
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-  initMosaicAnimation();
-  lastWidth = window.innerWidth;
-});
+document.addEventListener("DOMContentLoaded", renderMosaic);
+window.addEventListener("resize", scheduleRender);
 
-
-window.addEventListener('resize', () => {
-  if (window.innerWidth !== lastWidth) {
-    // Debounce to avoid executing too many times
-    clearTimeout(window.resizeTimer);
-    window.resizeTimer = setTimeout(() => {
-      initMosaicAnimation();
-      lastWidth = window.innerWidth;
-    }, 250);
-  }
-});
-
-export default { initMosaicAnimation };
+export default { renderMosaic };
