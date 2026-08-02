@@ -17,3 +17,7 @@ erl_crash.dump
 /installer/doc
 /installer/deps
 .DS_Store
+/.impeccable
+/.claude
+/.pi
+PRODUCT.md
