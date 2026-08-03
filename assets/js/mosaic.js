@@ -4,6 +4,7 @@ const SOURCE_URL = "/images/background.webp";
 const MAX_RENDER_PIXELS = 8_000_000;
 const MOSAIC_SEED = 20_250_802;
 
+let hasAnimated = false;
 let activeAnimation = null;
 let renderVersion = 0;
 let resizeTimer = null;
@@ -56,12 +57,16 @@ const createCoverCanvas = (image, width, height) => {
 };
 
 const renderMosaic = async () => {
+  if (hasAnimated) return;
+
   const container = document.getElementById("mosaic-animation");
   if (!container) return;
 
   const version = ++renderVersion;
   const { width, height } = container.getBoundingClientRect();
   if (width < 1 || height < 1) return;
+  hasAnimated = true;
+
 
   activeAnimation?.cancel();
   activeAnimation = null;
@@ -122,6 +127,8 @@ const renderMosaic = async () => {
 };
 
 const scheduleRender = () => {
+  if (hasAnimated) return;
+
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(renderMosaic, 250);
 };
