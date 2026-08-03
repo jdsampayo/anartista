@@ -1,6 +1,5 @@
 import MosaicPlugin from "../vendor/mosaic-plugin.js";
 
-const SOURCE_URL = "/images/background.webp";
 const MAX_RENDER_PIXELS = 8_000_000;
 const MOSAIC_SEED = 20_250_802;
 
@@ -9,16 +8,15 @@ let activeAnimation = null;
 let renderVersion = 0;
 let resizeTimer = null;
 let sourceImagePromise = null;
-
-const loadSourceImage = () => {
+const loadSourceImage = (sourceUrl) => {
   if (sourceImagePromise) return sourceImagePromise;
 
   sourceImagePromise = new Promise((resolve, reject) => {
     const image = new Image();
     image.decoding = "async";
     image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error(`Could not load ${SOURCE_URL}`));
-    image.src = SOURCE_URL;
+    image.onerror = () => reject(new Error(`Could not load ${sourceUrl}`));
+    image.src = sourceUrl;
 
     if (image.complete && image.naturalWidth > 0) resolve(image);
   });
@@ -62,6 +60,9 @@ const renderMosaic = async () => {
   const container = document.getElementById("mosaic-animation");
   if (!container) return;
 
+  const sourceUrl = container.dataset.backgroundSrc;
+  if (!sourceUrl) return;
+
   const version = ++renderVersion;
   const { width, height } = container.getBoundingClientRect();
   if (width < 1 || height < 1) return;
@@ -72,7 +73,7 @@ const renderMosaic = async () => {
   activeAnimation = null;
 
   try {
-    const image = await loadSourceImage();
+    const image = await loadSourceImage(sourceUrl);
     if (version !== renderVersion) return;
 
     const { canvas: sourceCanvas, pixelScale } = createCoverCanvas(image, width, height);
