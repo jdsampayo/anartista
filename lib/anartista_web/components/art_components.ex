@@ -4,26 +4,41 @@ defmodule AnartistaWeb.ArtComponents do
   attr(:title, :string, required: true)
   attr(:description, :string, required: true)
   attr(:image_name, :string, required: true)
+  attr(:layout, :string, default: "standard")
 
   def category_card(assigns) do
     ~H"""
-    <div class="border border-secondary/50 bg-white text-dark rounded-lg overflow-hidden transition transform duration-300 hover:-translate-y-2">
-      <div class="h-64 overflow-hidden">
+    <article
+      class={[
+        "group border-t border-secondary/50 pt-4",
+        @layout == "wide" && "lg:col-span-7",
+        @layout == "tall" && "lg:col-span-5",
+        @layout == "compact" && "lg:col-span-4",
+        @layout == "broad" && "lg:col-span-8"
+      ]}
+    >
+      <div class="overflow-hidden bg-dark">
         <img
-        width="480"
-        height="256"
-        data-hires={"/images/portafolio/#{@image_name}.webp"}
-        src={"/images/portafolio/#{@image_name}_thumb.webp"}
-        srcset={"/images/portafolio/#{@image_name}_thumb.webp 1x, /images/portafolio/#{@image_name}_thumb@2x.webp 2x"}
-        alt={@title}
-        class="w-full h-full object-cover transition duration-500 hover:scale-110 lightbox-trigger"
-      />
+          width="480"
+          height="256"
+          data-hires={"/images/portafolio/#{@image_name}.webp"}
+          src={"/images/portafolio/#{@image_name}_thumb.webp"}
+          srcset={"/images/portafolio/#{@image_name}_thumb.webp 1x, /images/portafolio/#{@image_name}_thumb@2x.webp 2x"}
+          alt={@title}
+          class={[
+            "lightbox-trigger h-72 w-full object-cover transition duration-500 group-hover:scale-[1.03]",
+            @layout == "wide" && "lg:h-[30rem]",
+            @layout == "tall" && "lg:h-[30rem]",
+            @layout == "compact" && "lg:h-80",
+            @layout == "broad" && "lg:h-80"
+          ]}
+        />
       </div>
-      <div class="p-5">
-        <h3 class="font-serif text-2xl mb-3 text-dark"><%= @title %></h3>
-        <p class="text-sm text-dark/75"><%= @description %></p>
+      <div class="grid gap-3 py-5 sm:grid-cols-[minmax(0,1fr)_2fr]">
+        <h3 class="font-serif text-3xl leading-none text-light"><%= @title %></h3>
+        <p class="max-w-prose text-sm leading-relaxed text-light/75"><%= @description %></p>
       </div>
-    </div>
+    </article>
     """
   end
 
