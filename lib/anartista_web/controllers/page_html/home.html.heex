@@ -21,9 +21,8 @@
         <li>Escultura</li>
         <li>Dibujo</li>
         <li>Mosaico</li>
-        <li class="text-muted">Bordado</li>
+        <li>Bordado</li>
       </ul>
-      <p class="mt-6 border-t border-primary/50 pt-4 text-sm text-muted">El bordado se suma próximamente.</p>
     </aside>
   </div>
 </section>
@@ -81,37 +80,31 @@
         title="Escultura"
         description="Mis piezas tridimensionales desafían la gravedad y el espacio, invitando al espectador a rodear la obra y descubrir sus múltiples perspectivas."
         image_name="escultura"
-        layout="compact"
+        layout="tall"
       />
       <.category_card
         title="Dibujo"
         description="El trazo como lenguaje primordial, donde cada línea es una declaración de intenciones. Mis dibujos navegan entre monocromáticos y policromáticos, creando mundos entre lo figurativo y lo abstracto que invitan a una lectura íntima y contemplativa."
         image_name="dibujo"
-        layout="broad"
+        layout="wide"
+      />
+      <.category_card
+        title="Mosaico"
+        description="El arte de fragmentar e incrustar. Utilizo teselas de esmalte de porcelana, vidrio, cerámica, piedra y elementos reciclados para crear obras que juegan con la luz, el color y la textura."
+        image_name="mosaico"
+        layout="wide"
+      />
+      <.category_card
+        title="Bordado"
+        description="El bordado transforma el hilo en trazo y la tela en superficie viva: cada puntada es una tesela distinta, repetida con paciencia hasta construir imagen."
+        image_name="bordado"
+        layout="tall"
       />
     </div>
   </div>
 </section>
 
-<!-- Mosaic -->
-<section class="bg-secondary/30 py-28 text-dark" id="mosaic">
-  <div class="mx-auto grid max-w-6xl gap-8 px-4 lg:grid-cols-12 lg:gap-x-10 lg:gap-y-10">
-    <div class="lg:col-span-5">
-      <h2 class="font-serif text-5xl leading-none sm:text-6xl">Mosaico</h2>
-      <p class="mt-8 font-serif text-2xl leading-snug">El arte de fragmentar e incrustar.</p>
-      <p class="mt-6 max-w-prose text-lg leading-relaxed">Como mosaiquista en México, trabajo con una técnica que no es tan común en nuestro país, lo que me permite ofrecer una perspectiva única y fresca. Cada pieza de mosaico es un fragmento que cobra sentido en el conjunto, una metáfora de cómo las pequeñas acciones y momentos conforman nuestra existencia.</p>
-      <p class="mt-6 max-w-prose text-lg leading-relaxed">Utilizo teselas de esmalte de porcelana, vidrio, cerámica, piedra y elementos reciclados para crear obras que juegan con la luz, el color y la textura.</p>
-    </div>
-    <div class="lg:col-span-7">
-      <.mosaic_gallery_item image_name="1" description="Flor" />
-    </div>
-    <div class="lg:col-start-4 lg:col-span-5">
-      <.mosaic_gallery_item image_name="2" description="Homenaje a Emma Reyes y a mi mamá que me cobijó con su rebozo" />
-    </div>
-  </div>
-</section>
-
-<section :if={@substack_posts != []} class="bg-dark py-28 text-light" id="writing">
+<section :if={@substack_posts != []} class="bg-light py-28" id="writing">
   <div class="mx-auto max-w-6xl px-4">
     <div class="grid gap-6 border-b border-secondary/60 pb-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end">
       <h2 class="font-serif text-5xl leading-none sm:text-6xl">Escritos</h2>
