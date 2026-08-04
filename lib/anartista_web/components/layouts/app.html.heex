@@ -5,26 +5,26 @@
     </a>
     <nav class="hidden md:block" aria-label="Navegación principal">
       <ul class="flex">
-        <li class="ml-8"><a href="/#about" class="text-darkgray no-underline font-medium transition duration-300 hover:text-primary focus-visible:text-primary">Acerca de</a></li>
-        <li class="ml-8"><a href="/#art" class="text-darkgray no-underline font-medium transition duration-300 hover:text-primary focus-visible:text-primary">Arte</a></li>
-        <li class="ml-8"><a href="/#mosaic" class="text-darkgray no-underline font-medium transition duration-300 hover:text-primary focus-visible:text-primary">Mosaico</a></li>
-        <li :if={is_list(assigns[:substack_posts]) and assigns[:substack_posts] != []} class="ml-8"><a href="/#writing" class="text-darkgray no-underline font-medium transition duration-300 hover:text-primary focus-visible:text-primary">Escritos</a></li>
-        <li class="ml-8"><a href="/#exhibitions" class="text-darkgray no-underline font-medium transition duration-300 hover:text-primary focus-visible:text-primary">Exposiciones</a></li>
-        <li class="ml-8"><a href="/#contact" class="text-darkgray no-underline font-medium transition duration-300 hover:text-primary focus-visible:text-primary">Contacto</a></li>
+        <li class="ml-6"><a href="/#about" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Acerca de</a></li>
+        <li class="ml-6"><a href="/#art" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Arte</a></li>
+        <li class="ml-6"><a href="/#mosaic" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Mosaico</a></li>
+        <li :if={is_list(assigns[:substack_posts]) and assigns[:substack_posts] != []} class="ml-6"><a href="/#writing" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Escritos</a></li>
+        <li class="ml-6"><a href="/#exhibitions" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Exposiciones</a></li>
+        <li class="ml-6"><a href="/#contact" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Contacto</a></li>
       </ul>
     </nav>
     <details class="relative md:hidden">
-      <summary class="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center border border-dark px-3 font-medium text-dark transition hover:border-primary hover:text-primary focus-visible:border-primary focus-visible:text-primary [&::-webkit-details-marker]:hidden" aria-label="Abrir navegación">
+      <summary class="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center border border-dark px-3 font-medium text-dark transition hover:border-primary hover:bg-primary focus-visible:border-primary focus-visible:bg-primary [&::-webkit-details-marker]:hidden" aria-label="Abrir navegación">
         <span aria-hidden="true">Menú</span>
       </summary>
       <nav class="absolute right-0 mt-3 w-64 border border-primary bg-light p-2 shadow-lg" aria-label="Navegación móvil">
         <ul class="space-y-1">
-          <li><a href="/#about" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-cement focus-visible:bg-cement">Acerca de</a></li>
-          <li><a href="/#art" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-cement focus-visible:bg-cement">Arte</a></li>
-          <li><a href="/#mosaic" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-cement focus-visible:bg-cement">Mosaico</a></li>
-          <li :if={is_list(assigns[:substack_posts]) and assigns[:substack_posts] != []}><a href="/#writing" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-cement focus-visible:bg-cement">Escritos</a></li>
-          <li><a href="/#exhibitions" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-cement focus-visible:bg-cement">Exposiciones</a></li>
-          <li><a href="/#contact" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-cement focus-visible:bg-cement">Contacto</a></li>
+          <li><a href="/#about" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Acerca de</a></li>
+          <li><a href="/#art" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Arte</a></li>
+          <li><a href="/#mosaic" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Mosaico</a></li>
+          <li :if={is_list(assigns[:substack_posts]) and assigns[:substack_posts] != []}><a href="/#writing" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Escritos</a></li>
+          <li><a href="/#exhibitions" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Exposiciones</a></li>
+          <li><a href="/#contact" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Contacto</a></li>
         </ul>
       </nav>
     </details>

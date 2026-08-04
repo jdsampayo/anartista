@@ -21,13 +21,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary': '#9ea531', // verde
-        'secondary': '#B5DDD1', // menta agua
-        'light': '#dcdcd7',
-        'dark': '#594d3d', // gris oscuro
-        'accent': '#121212',
-        'cement': '#ded9ca',
-        'white': '#E8E6E1',
+        'primary': '#9ea531',
+        'secondary': '#B5DDD1',
+        'accent': '#F9629F',
+        'light': '#F4F0E6',
+        'dark': '#2F2721',
+        'cement': '#E9E1D5',
+        'white': '#FFFCF7',
+        'muted': '#5E5147',
         'green': '#9ea531'
       },
       fontFamily: {

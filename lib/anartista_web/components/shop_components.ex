@@ -36,7 +36,7 @@ defmodule AnartistaWeb.ShopComponents do
 
       <!-- Info -->
       <div class="flex flex-col flex-1 p-5 gap-2">
-        <span class="text-xs uppercase tracking-widest text-primary font-semibold"><%= @category %></span>
+        <span class="text-xs uppercase tracking-widest text-muted font-semibold"><%= @category %></span>
         <h3 class="font-serif text-lg text-dark leading-tight"><%= @name %></h3>
         <%= if @description do %>
           <p class="text-sm text-gray-500 flex-1"><%= @description %></p>

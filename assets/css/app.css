@@ -16,7 +16,7 @@
       left: 0;
       width: 50%;
       overflow: hidden;
-      color: #594d3d;
+      color: #2F2721;
     }
   }
 }
@@ -25,7 +25,7 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: #594d3d url("/images/background.webp") center / cover no-repeat;
+  background: #2F2721 url("/images/background.webp") center / cover no-repeat;
 }
 
 .hero-mosaic-canvas {
