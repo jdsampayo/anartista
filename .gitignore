@@ -22,3 +22,4 @@ erl_crash.dump
 /.pi
 PRODUCT.md
 DESIGN.md
+/priv/static/uploads/pieces

@@ -14,6 +14,12 @@ MIX_ENV=prod mix release
 sudo systemctl restart anartista
 ```
 
+## Store administration
+
+Set `ADMIN_USER` and `ADMIN_PASS` in the `anartista.service` environment before restarting the release. The authenticated catalog is available at `/admin/store`.
+
+Uploaded piece photos are stored in `priv/static/uploads/pieces`. Keep that directory writable and persistent across deployments.
+
 ## Check errors
 
 ```sh

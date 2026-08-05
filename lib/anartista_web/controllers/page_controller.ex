@@ -1,6 +1,8 @@
 defmodule AnartistaWeb.PageController do
   use AnartistaWeb, :controller
 
+  alias Anartista.Store
+
   def home(conn, _params) do
     render(conn, :home, substack_posts: Anartista.Substack.posts(3))
   end
@@ -18,6 +20,6 @@ defmodule AnartistaWeb.PageController do
   end
 
   def shop(conn, _params) do
-    render(conn, :shop)
+    render(conn, :shop, pieces: Store.list_pieces())
   end
 end
