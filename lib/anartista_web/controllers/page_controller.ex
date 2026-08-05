@@ -20,6 +20,6 @@ defmodule AnartistaWeb.PageController do
   end
 
   def shop(conn, _params) do
-    render(conn, :shop, pieces: Store.list_pieces())
+    render(conn, :shop, pieces_by_category: Store.list_pieces_by_category())
   end
 end

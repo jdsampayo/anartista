@@ -11,6 +11,7 @@ defmodule AnartistaWeb.StoreControllerTest do
     photo: "/uploads/pieces/available.webp",
     price: "1250.00",
     payment_link: "https://buy.stripe.com/available-piece",
+    category: "Artesanía",
     available: true
   }
 
@@ -20,6 +21,10 @@ defmodule AnartistaWeb.StoreControllerTest do
     photo: "/uploads/pieces/sold.webp",
     price: "850.00",
     payment_link: "https://buy.stripe.com/sold-piece",
+    category: "Piezas únicas",
+    technique: "Mosaico en porcelana",
+    dimensions: "40x60 cm",
+    year: 2026,
     available: false
   }
 
@@ -46,6 +51,11 @@ defmodule AnartistaWeb.StoreControllerTest do
     assert html =~ "Collar disponible"
     assert html =~ "Aretes vendidos"
     assert html =~ "Vendida"
+    assert html =~ "Artesanía"
+    assert html =~ "Piezas únicas"
+    assert html =~ "Mosaico en porcelana"
+    assert html =~ "40x60 cm"
+    assert html =~ "2026"
     assert html =~ ~s(href="https://buy.stripe.com/available-piece")
     refute html =~ ~s(href="https://buy.stripe.com/sold-piece")
   end
@@ -59,11 +69,15 @@ defmodule AnartistaWeb.StoreControllerTest do
   end
 
   test "GET /admin/store renders the management interface for the configured administrator", %{conn: conn} do
+    {:ok, _piece} = Store.create_piece(Map.put(@available_attrs, :category, "Stickers"))
+
     conn = put_req_header(conn, "authorization", "Basic " <> Base.encode64("admin:secret"))
 
     assert {:ok, _view, html} = live(conn, ~p"/admin/store")
     assert html =~ "Administrar tienda"
     assert html =~ "Agregar pieza"
+    assert html =~ ~s(list="piece-categories")
+    assert html =~ ~s(value="Stickers")
   end
 
   defp restore_env(key, nil), do: System.delete_env(key)

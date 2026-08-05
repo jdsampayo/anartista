@@ -14,6 +14,21 @@ defmodule Anartista.Store do
     |> Repo.all()
   end
 
+  def list_categories do
+    Piece
+    |> where([piece], not is_nil(piece.category) and piece.category != "")
+    |> distinct(true)
+    |> order_by([piece], asc: piece.category)
+    |> select([piece], piece.category)
+    |> Repo.all()
+  end
+
+  def list_pieces_by_category do
+    list_pieces()
+    |> Enum.group_by(& &1.category)
+    |> Enum.sort_by(fn {category, _pieces} -> String.downcase(category) end)
+  end
+
   def get_piece!(id), do: Repo.get!(Piece, id)
 
   def create_piece(attrs \\ %{}) do

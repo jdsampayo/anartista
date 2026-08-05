@@ -18,6 +18,7 @@ defmodule AnartistaWeb.Admin.StoreLive do
      )
      |> assign(:editing_piece, nil)
      |> assign(:pieces, Store.list_pieces())
+     |> assign(:categories, Store.list_categories())
      |> assign_form(Store.change_piece(%Piece{}))}
   end
 
@@ -136,6 +137,7 @@ defmodule AnartistaWeb.Admin.StoreLive do
                     <div class="flex min-w-52 gap-3">
                       <img src={piece.photo} alt="" class="h-14 w-14 border border-primary/50 object-cover" />
                       <div>
+                        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{piece.category}</p>
                         <p class="font-serif text-lg leading-tight text-dark">{piece.name}</p>
                         <p class="mt-1 max-w-sm text-sm leading-relaxed text-muted">{piece.description}</p>
                       </div>
@@ -183,9 +185,39 @@ defmodule AnartistaWeb.Admin.StoreLive do
             </div>
 
             <div>
+              <label for={@form[:category].id} class="text-sm font-semibold text-dark">Categoría</label>
+              <input id={@form[:category].id} name={@form[:category].name} value={@form[:category].value} type="text" list="piece-categories" autocomplete="off" required maxlength="100" class="mt-2 block w-full border border-primary/70 bg-light px-3 py-2 text-dark focus:border-dark focus:ring-0" />
+              <datalist id="piece-categories">
+                <option :for={category <- @categories} value={category}></option>
+              </datalist>
+              <p class="mt-1 text-xs text-muted">Escribe una categoría nueva o elige una ya usada.</p>
+              <.field_errors field={@form[:category]} />
+            </div>
+
+            <div>
               <label for={@form[:description].id} class="text-sm font-semibold text-dark">Descripción</label>
               <textarea id={@form[:description].id} name={@form[:description].name} required maxlength="2000" rows="5" class="mt-2 block w-full border border-primary/70 bg-light px-3 py-2 text-dark focus:border-dark focus:ring-0">{@form[:description].value}</textarea>
               <.field_errors field={@form[:description]} />
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for={@form[:technique].id} class="text-sm font-semibold text-dark">Técnica</label>
+                <input id={@form[:technique].id} name={@form[:technique].name} value={@form[:technique].value} type="text" maxlength="255" class="mt-2 block w-full border border-primary/70 bg-light px-3 py-2 text-dark focus:border-dark focus:ring-0" />
+                <.field_errors field={@form[:technique]} />
+              </div>
+
+              <div>
+                <label for={@form[:dimensions].id} class="text-sm font-semibold text-dark">Dimensiones</label>
+                <input id={@form[:dimensions].id} name={@form[:dimensions].name} value={@form[:dimensions].value} type="text" maxlength="100" class="mt-2 block w-full border border-primary/70 bg-light px-3 py-2 text-dark focus:border-dark focus:ring-0" />
+                <.field_errors field={@form[:dimensions]} />
+              </div>
+            </div>
+
+            <div>
+              <label for={@form[:year].id} class="text-sm font-semibold text-dark">Año</label>
+              <input id={@form[:year].id} name={@form[:year].name} value={@form[:year].value} type="number" min="1" max="9999" step="1" class="mt-2 block w-full border border-primary/70 bg-light px-3 py-2 text-dark focus:border-dark focus:ring-0" />
+              <.field_errors field={@form[:year]} />
             </div>
 
             <div>
@@ -303,7 +335,11 @@ defmodule AnartistaWeb.Admin.StoreLive do
   defp delete_photo(_photo), do: :ok
 
   defp assign_form(socket, changeset), do: assign(socket, :form, to_form(changeset))
-  defp refresh_pieces(socket), do: assign(socket, :pieces, Store.list_pieces())
+  defp refresh_pieces(socket) do
+    socket
+    |> assign(:pieces, Store.list_pieces())
+    |> assign(:categories, Store.list_categories())
+  end
   defp form_title(nil), do: "Agregar pieza"
   defp form_title(_piece), do: "Editar pieza"
   defp save_label(nil), do: "Guardar pieza"
