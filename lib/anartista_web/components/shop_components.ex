@@ -1,64 +1,37 @@
 defmodule AnartistaWeb.ShopComponents do
   use Phoenix.Component
 
-  @doc """
-  Card of a product
-  """
-  attr :name, :string, required: true
-  attr :price, :integer, required: true
-  attr :category, :string, required: true
-  attr :image, :string, required: true
-  attr :description, :string, default: nil
-  attr :sold_out, :boolean, default: false
+  alias Anartista.Store.Piece
 
-  def product_card(assigns) do
+  attr :piece, Piece, required: true
+
+  def piece_card(assigns) do
     ~H"""
-    <div class={[
-      "group relative flex flex-col bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300",
-      @sold_out && "opacity-60"
-    ]}>
-      <!-- Badge sold -->
-      <%= if @sold_out do %>
-        <span class="absolute top-3 right-3 z-10 bg-dark text-light text-xs font-semibold px-3 py-1 rounded-full">
-          Agotado
-        </span>
-      <% end %>
-
-      <!-- Image -->
-      <div class="relative overflow-hidden aspect-square bg-gray-100">
-        <img
-          src={"/images/tienda/#{@image}.jpeg"}
-          alt={@name}
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
-        />
+    <article class="group flex h-full flex-col border border-secondary bg-white shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div class="relative aspect-square overflow-hidden bg-cement">
+        <img src={@piece.photo} alt={@piece.name} class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+        <span :if={!@piece.available} class="absolute left-0 top-0 bg-accent px-4 py-2 text-sm font-semibold text-dark">Vendida</span>
       </div>
-
-      <!-- Info -->
-      <div class="flex flex-col flex-1 p-5 gap-2">
-        <span class="text-xs uppercase tracking-widest text-muted font-semibold"><%= @category %></span>
-        <h3 class="font-serif text-lg text-dark leading-tight"><%= @name %></h3>
-        <%= if @description do %>
-          <p class="text-sm text-gray-500 flex-1"><%= @description %></p>
-        <% end %>
-        <p class="text-xl font-bold text-dark mt-2">
-          $<%= :erlang.integer_to_list(@price) |> to_string() %> <span class="text-sm font-normal text-gray-400">MXN</span>
-        </p>
+      <div class="flex flex-1 flex-col p-6">
+        <h2 class="font-serif text-2xl leading-tight text-dark">{@piece.name}</h2>
+        <p class="mt-3 flex-1 leading-relaxed text-dark/80">{@piece.description}</p>
+        <div class="mt-6 flex items-end justify-between gap-4 border-t border-secondary/70 pt-4">
+          <p class="text-lg font-semibold text-dark">${format_price(@piece.price)}</p>
+          <a
+            :if={@piece.available}
+            href={@piece.payment_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-11 items-center bg-primary px-4 py-2 text-sm font-semibold text-dark no-underline transition hover:bg-accent focus-visible:bg-accent"
+          >
+            Comprar
+          </a>
+          <span :if={!@piece.available} class="text-sm font-semibold text-muted">Archivo de obra</span>
+        </div>
       </div>
-    </div>
+    </article>
     """
   end
 
-  @doc """
-  Category.
-  """
-  attr :title, :string, required: true
-
-  def category_heading(assigns) do
-    ~H"""
-    <h2 class="font-serif text-2xl text-dark mb-6 pb-2 border-b border-primary/30">
-      <%= @title %>
-    </h2>
-    """
-  end
+  defp format_price(price), do: Decimal.to_string(price, :normal)
 end

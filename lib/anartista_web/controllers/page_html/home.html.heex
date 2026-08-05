@@ -1,113 +1,124 @@
 <!-- Hero Section -->
-<section class="relative min-h-[700px] md:h-screen flex items-center justify-center overflow-hidden mt-0 sm:mt-10 py-16 md:py-0 bg-light" id="hero">
+<section class="relative isolate min-h-[760px] overflow-hidden bg-dark pt-24 sm:mt-10 lg:min-h-screen" id="hero">
   <div class="mosaic-container" id="mosaic-animation" data-background-src={~p"/images/background.webp"}></div>
-  <div class="relative z-10 text-center text-light max-w-4xl px-4">
-    <h1 class="bg-dark border border-secondary/50 font-mosaic text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-4 md:mb-6 animate-fade-in p-3 md:p-4" style="animation-delay: 3s;">
-      <span class="text-primary">A</span><span class="text-secondary">n</span><span class="text-primary">a</span> <span class="text-accent">Artist</span>a
-    </h1>
-    <p class="bg-dark/95 text-lg sm:text-xl mb-6 md:mb-8 animate-fade-in p-3 md:p-4" style="animation-delay: 3.5s;">Transformando lo fragmentario en diálogos permanentes</p>
-    <div class="flex flex-col items-center justify-center gap-3 sm:flex-row animate-fade-in" style="animation-delay: 4s;">
-      <a href="#art" class="min-h-11 border-2 border-primary bg-primary px-6 py-2 font-semibold text-dark no-underline transition hover:bg-light hover:text-dark focus-visible:bg-light focus-visible:text-dark">
-        Ver obra
-      </a>
-      <a href="#contact" class="min-h-11 border-2 border-accent bg-accent px-6 py-2 font-semibold text-dark no-underline transition hover:bg-light hover:text-dark focus-visible:bg-light focus-visible:text-dark">
-        Contactar
-      </a>
+  <div class="relative z-10 mx-auto grid min-h-[760px] max-w-6xl items-center gap-6 px-4 py-10 lg:min-h-[calc(100vh-2.5rem)] lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-10 lg:py-16">
+    <div class="border border-secondary/60 bg-dark/95 p-6 text-light shadow-2xl sm:p-10">
+      <p class="mb-8 font-semibold uppercase tracking-[0.18em] text-secondary">Práctica multidisciplinaria · Ciudad de México</p>
+      <h1 class="font-mosaic text-5xl leading-[0.84] sm:text-6xl lg:text-7xl xl:text-8xl">
+        <span class="text-primary">AN</span><span class="text-accent">ARTIST</span><span class="text-light">A</span>
+      </h1>
+      <p class="mt-8 max-w-2xl text-lg leading-relaxed text-light sm:text-xl">Transformando lo fragmentario en diálogos permanentes.</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="#about" class="inline-flex min-h-11 items-center justify-center border-2 border-primary bg-primary px-6 py-2 font-semibold text-dark no-underline transition hover:bg-light focus-visible:bg-light">Conocer la práctica</a>
+        <a href="#art" class="inline-flex min-h-11 items-center justify-center border-2 border-accent bg-accent px-6 py-2 font-semibold text-dark no-underline transition hover:bg-light focus-visible:bg-light">Ver obra</a>
+      </div>
+    </div>
+    <aside class="border border-primary/70 bg-light/95 p-5 text-dark shadow-xl sm:p-6" aria-label="Medios de la práctica">
+      <p class="font-semibold uppercase tracking-[0.18em] text-muted">Medios</p>
+      <ul class="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 font-serif text-xl">
+        <li>Pintura</li>
+        <li>Grabado</li>
+        <li>Escultura</li>
+        <li>Dibujo</li>
+        <li>Mosaico</li>
+        <li>Bordado</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- Practice -->
+<section class="bg-light py-28" id="about">
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 lg:grid-cols-12 lg:gap-x-10 lg:gap-y-14">
+    <div class="lg:col-span-4">
+      <h2 class="font-serif text-5xl leading-none text-dark sm:text-6xl">Práctica</h2>
+      <p class="mt-8 max-w-sm font-serif text-2xl leading-snug text-dark">Arte donde los fragmentos encuentran voz.</p>
+    </div>
+    <div class="max-w-prose text-lg leading-relaxed text-dark lg:col-span-4">
+      <p>Soy Ana, creadora multidisciplinar que funde técnicas ancestrales con preguntas contemporáneas. Mi práctica artística —pintura, grabado, escultura y especialmente mosaico— es un territorio donde lo aparentemente disperso cobra nuevo sentido.</p>
+      <p class="mt-6">"Anartista" nace de la unión entre Ana y arte, pero también evoca ese espacio liminal donde la creación desafía estructuras rígidas. Mi obra se nutre de dos certezas: la convicción en lo que no se ve pero se intuye, y el principio de que todo material contiene potencial transformador cuando se libera de jerarquías establecidas.</p>
+    </div>
+    <figure class="border border-primary/50 bg-white p-3 shadow-xl lg:col-span-4 lg:row-span-2">
+      <img
+        width="728"
+        height="970"
+        src={~p"/images/ana-studio.webp"}
+        alt="Ana trabajando en su estudio"
+        class="block h-full w-full object-cover"
+        srcset={"#{~p"/images/ana-studio.webp"} 1x, #{~p"/images/ana-studio@2x.webp"} 2x"}
+      />
+      <figcaption class="border-t border-primary/50 pt-3 text-sm text-muted">Ana en el estudio</figcaption>
+    </figure>
+    <div class="max-w-prose text-lg leading-relaxed text-dark lg:col-span-8">
+      <p>En el mosaico encontré mi lenguaje rebelde: una técnica que rompe para reconstruir, que toma piezas olvidadas y las convierte en narrativas de resistencia. Cada proyecto es un acto de fe en lo colectivo —las teselas pierden su individualidad para crear algo mayor— y al mismo tiempo, un manifiesto sobre la belleza que emerge cuando permitimos que lo fragmentado dialogue sin imposiciones.</p>
+      <p class="mt-6">Trabajo con las manos en la tierra y los ojos en el horizonte, buscando ese punto donde la herencia cultural mexicana se encuentra con preguntas universales. Mi arte no ofrece respuestas, sino que teje puentes entre lo permanente y lo efímero, invitando a contemplar el mundo como un gran mosaico en constante recomposición.</p>
     </div>
   </div>
 </section>
 
-<!-- About Section -->
-<section class="py-24 bg-light" id="about">
-  <div class="container mx-auto px-4">
-    <h2 class="font-serif text-4xl text-center mb-12 text-dark relative after:content-[''] after:absolute after:bottom-[-15px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-primary">Acerca de</h2>
-    <div class="flex flex-col md:flex-row items-center gap-12">
-      <div class="flex-1">
-        <h3 class="font-serif text-2xl mb-5 text-dark">Arte donde los fragmentos encuentran voz</h3>
-        <p class="mb-5 text-lg">Soy Ana, creadora multidisciplinar que funde técnicas ancestrales con preguntas contemporáneas. Mi práctica artística -pintura, grabado, escultura y especialmente mosaico- es un territorio donde lo aparentemente disperso cobra nuevo sentido.</p>
-        <p class="mb-5 text-lg">"Anartista" nace de la unión entre Ana y arte, pero también evoca ese espacio liminal donde la creación desafía estructuras rígidas. Mi obra se nutre de dos certezas: la convicción en lo que no se ve pero se intuye, y el principio de que todo material contiene potencial transformador cuando se libera de jerarquías establecidas.</p>
-        <p class="mb-5 text-lg">En el mosaico encontré mi lenguaje rebelde: una técnica que rompe para reconstruir, que toma piezas olvidadas y las convierte en narrativas de resistencia. Cada proyecto es un acto de fe en lo colectivo -las teselas pierden su individualidad para crear algo mayor- y al mismo tiempo, un manifiesto sobre la belleza que emerge cuando permitimos que lo fragmentado dialogue sin imposiciones.</p>
-        <p class="text-lg">Trabajo con las manos en la tierra y los ojos en el horizonte, buscando ese punto donde la herencia cultural mexicana se encuentra con preguntas universales. Mi arte no ofrece respuestas, sino que teje puentes entre lo permanente y lo efímero, invitando a contemplar el mundo como un gran mosaico en constante recomposición.</p>
-      </div>
-      <div class="flex-1 rounded-lg overflow-hidden shadow-xl">
-        <img
-          width="728"
-          height="970"
-          src={~p"/images/ana-studio.webp"}
-          alt="Ana trabajando en su estudio"
-          class="w-full h-auto block"
-          srcset={"#{~p"/images/ana-studio.webp"} 1x, #{~p"/images/ana-studio@2x.webp"} 2x"}
-        />
-      </div>
+<!-- Selected work -->
+<section class="bg-dark py-28 text-light" id="art">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="grid gap-6 border-b border-primary/70 pb-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end">
+      <h2 class="font-serif text-5xl leading-none sm:text-6xl">Obra</h2>
+      <p class="max-w-prose text-lg leading-relaxed text-light/80">Una selección por disciplina. Cada registro conserva espacio para crecer hacia una ficha de obra cuando exista más información.</p>
     </div>
-  </div>
-</section>
-
-<!-- Art Categories -->
-<section class="py-24 bg-dark text-light" id="art">
-  <div class="container mx-auto px-4">
-    <h2 class="font-serif text-4xl text-center mb-12 text-light relative after:content-[''] after:absolute after:bottom-[-15px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-secondary">Arte</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-
+    <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-12">
       <.category_card
         title="Pintura"
         description="Exploraciones cromáticas y texturales que juegan con la luz y la profundidad. Mi trabajo pictórico refleja mis inquietudes internas y mi diálogo con el entorno."
         image_name="pintura"
+        layout="wide"
       />
-
       <.category_card
         title="Grabado"
         description="El arte de la impresión me permite explorar la reproducción y la unicidad, creando series que varían sutilmente entre sí, cuestionando el concepto de original."
         image_name="grabado"
+        layout="tall"
       />
-
       <.category_card
         title="Escultura"
         description="Mis piezas tridimensionales desafían la gravedad y el espacio, invitando al espectador a rodear la obra y descubrir sus múltiples perspectivas."
         image_name="escultura"
+        layout="tall"
       />
-
       <.category_card
         title="Dibujo"
         description="El trazo como lenguaje primordial, donde cada línea es una declaración de intenciones. Mis dibujos navegan entre monocromáticos y policromáticos, creando mundos entre lo figurativo y lo abstracto que invitan a una lectura íntima y contemplativa."
         image_name="dibujo"
+        layout="wide"
+      />
+      <.category_card
+        title="Mosaico"
+        description="El arte de fragmentar e incrustar. Utilizo teselas de esmalte de porcelana, vidrio, cerámica, piedra y elementos reciclados para crear obras que juegan con la luz, el color y la textura."
+        image_name="mosaico"
+        layout="wide"
+      />
+      <.category_card
+        title="Bordado"
+        description="El bordado transforma el hilo en trazo y la tela en superficie viva: cada puntada es una tesela distinta, repetida con paciencia hasta construir imagen."
+        image_name="bordado"
+        layout="tall"
       />
     </div>
   </div>
 </section>
 
-<!-- Featured Mosaic -->
-<section class="py-24 bg-secondary/30 text-dark" id="mosaic">
-  <div class="container mx-auto px-4">
-    <h2 class="font-serif text-4xl text-center mb-12 text-dark relative after:content-[''] after:absolute after:bottom-[-15px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-primary">Mosaico</h2>
-    <div class="flex flex-col items-center">
-      <div class="text-center max-w-4xl mb-12">
-        <h3 class="font-serif text-3xl mb-5 text-dark">El Arte de Fragmentar e Incrustar</h3>
-        <p class="text-lg mb-6">Como mosaiquista en México, trabajo con una técnica que no es tan común en nuestro país, lo que me permite ofrecer una perspectiva única y fresca. Cada pieza de mosaico es un fragmento que cobra sentido en el conjunto, una metáfora de cómo las pequeñas acciones y momentos conforman nuestra existencia.</p>
-        <p class="text-lg">Utilizo teselas de diversos materiales como esmalte de porcelana, vidrio, cerámica, piedra y elementos reciclados para crear obras que juegan con la luz, el color y la textura. Mis mosaicos van desde piezas decorativas hasta instalaciones de gran formato, explorando tanto lo abstracto como lo figurativo.</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
-        <.mosaic_gallery_item image_name="1" description="Flor" />
-        <.mosaic_gallery_item image_name="2" description="Homenaje a Emma Reyes y a mi mamá que me cobijó con su rebozo"/>
-      </div>
+<section :if={@substack_posts != []} class="bg-light py-28" id="writing">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="grid gap-6 border-b border-secondary/60 pb-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end">
+      <h2 class="font-serif text-5xl leading-none sm:text-6xl">Escritos</h2>
+      <p class="max-w-prose text-lg leading-relaxed text-light/80">Notas y procesos que expanden la práctica más allá de la imagen terminada.</p>
     </div>
-  </div>
-</section>
-
-<section :if={@substack_posts != []} class="py-24 bg-dark text-light" id="writing">
-  <div class="container mx-auto px-4">
-    <h2 class="font-serif text-4xl text-center mb-12 text-light relative after:content-[''] after:absolute after:bottom-[-15px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-secondary">
-      Escritos
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       <.writing_card :for={post <- @substack_posts} post={post} />
     </div>
-    <div class="text-center mt-12">
+    <div class="mt-12">
       <a
         href="https://apalvarezvega.substack.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-block border-2 border-secondary text-secondary hover:bg-secondary hover:text-dark font-semibold py-3 px-8 rounded transition"
+        class="inline-flex min-h-11 items-center border-2 border-secondary bg-secondary px-6 py-2 font-semibold text-dark no-underline transition hover:bg-light focus-visible:bg-light"
       >
         Ver todos los escritos
       </a>
@@ -116,60 +127,62 @@
 </section>
 
 <!-- Exhibitions -->
-<section class="py-24 bg-accent/20" id="exhibitions">
-  <div class="container mx-auto px-4">
-    <h2 class="font-serif text-4xl text-center mb-16 text-dark relative after:content-[''] after:absolute after:bottom-[-15px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-secondary">Exposiciones</h2>
-
-    <.exhibition_card
-      title="Universos Personales: Primera Exposición"
-      date="26 de marzo a 28 de abril 2025"
-      location="Ciudad de México"
-      opening="Inauguración a las 6pm"
-      image_name="universos-personales-2025"
-      image_alt="Universos Personales: Primera Exposición"
-      description="Muestra colectiva de estudiantes de La Esmeralda que exhibe obras de diversas disciplinas artísticas en el restaurante La Guarida del Diablo Panzón. Una iniciativa que promueve el talento emergente con temática libre y oportunidad de venta directa para los artistas.."
-      link_url="https://www.esmeralda.edu.mx/_files/ugd/d50bce_b8566f0fe8154223bf11385f5e01df69.pdf"
-      link_text="Enlace externo"
-    />
-    <.exhibition_card
-      title="Mujeres Creadoras 2025: Cuidados"
-      date="22 y 23 de marzo 2025"
-      location="Ciudad de México"
-      opening="Inicia a las 9am"
-      image_name="mujeres-creadoras-2025"
-      image_alt="Mujeres Creadoras 2025: Exposición sobre cuidados"
-      description="Exposición que aborda los cuidados desde múltiples dimensiones y narrativas, desde el arte, la política, el encuentro y la compartición."
-      link_url="https://www.mujerescreadoras.org/"
-      link_text="Enlace externo"
-    />
-
+<section class="bg-accent/20 py-28" id="exhibitions">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="grid gap-6 border-b border-dark/30 pb-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end">
+      <h2 class="font-serif text-5xl leading-none text-dark sm:text-6xl">Exposiciones</h2>
+      <p class="max-w-prose text-lg leading-relaxed text-dark/80">Archivo de participaciones, encuentros y contextos donde la obra continúa su conversación.</p>
+    </div>
+    <div class="mt-12">
+      <.exhibition_card
+        title="Universos Personales: Primera Exposición"
+        date="26 de marzo a 28 de abril 2025"
+        location="Ciudad de México"
+        opening="Inauguración a las 6pm"
+        image_name="universos-personales-2025"
+        image_alt="Universos Personales: Primera Exposición"
+        description="Muestra colectiva de estudiantes de La Esmeralda que exhibe obras de diversas disciplinas artísticas en el restaurante La Guarida del Diablo Panzón. Una iniciativa que promueve el talento emergente con temática libre y oportunidad de venta directa para los artistas."
+        link_url="https://www.esmeralda.edu.mx/_files/ugd/d50bce_b8566f0fe8154223bf11385f5e01df69.pdf"
+        link_text="Ver programa (PDF)"
+      />
+      <.exhibition_card
+        title="Mujeres Creadoras 2025: Cuidados"
+        date="22 y 23 de marzo 2025"
+        location="Ciudad de México"
+        opening="Inicia a las 9am"
+        image_name="mujeres-creadoras-2025"
+        image_alt="Mujeres Creadoras 2025: Exposición sobre cuidados"
+        description="Exposición que aborda los cuidados desde múltiples dimensiones y narrativas, desde el arte, la política, el encuentro y la compartición."
+        link_url="https://www.mujerescreadoras.org/"
+        link_text="Visitar Mujeres Creadoras"
+      />
+    </div>
   </div>
 </section>
 
 <!-- Contact -->
-<section class="py-24 bg-secondary/20" id="contact">
-  <div class="container mx-auto px-4">
-    <h2 class="font-serif text-4xl text-center mb-12 text-dark relative after:content-[''] after:absolute after:bottom-[-15px] after:left-1/2 after:transform after:-translate-x-1/2 after:w-20 after:h-1 after:bg-primary">Contacto</h2>
-    <div class="flex flex-col lg:flex-row justify-between gap-12">
-      <div class="flex-1 max-w-2xl">
-        <%= live_render(@conn, AnartistaWeb.ContactLive, id: "contact-form") %>
-      </div>
-
-      <div class="flex-1">
-        <div class="mb-8">
-          <h3 class="font-serif text-xl mb-2 text-dark">Ubicación</h3>
-          <p>Ciudad de México, México</p>
-        </div>
-        <div class="mb-8">
-          <h3 class="font-serif text-xl mb-2 text-dark">Instagram</h3>
-          <p>@apalvarezvega</p>
+<section class="bg-light py-28" id="contact">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-12 lg:gap-x-16">
+    <div class="lg:col-span-4">
+      <h2 class="font-serif text-5xl leading-none text-dark sm:text-6xl">Contacto</h2>
+      <p class="mt-8 max-w-sm font-serif text-2xl leading-snug text-dark">Abramos una conversación sobre obra, colaboración o exposición.</p>
+      <div class="mt-10 space-y-7 text-dark">
+        <div>
+          <h3 class="font-semibold uppercase tracking-[0.16em] text-muted">Ubicación</h3>
+          <p class="mt-2">Ciudad de México, México</p>
         </div>
         <div>
-          <h3 class="font-serif text-xl mb-2 text-dark">Horario de Atención</h3>
-          <p>Lunes a Viernes: 10am - 6pm</p>
-          <p>Fines de semana: Con cita previa</p>
+          <h3 class="font-semibold uppercase tracking-[0.16em] text-muted">Instagram</h3>
+          <a href="https://www.instagram.com/apalvarezvega" class="mt-2 inline-flex text-dark underline decoration-primary decoration-2 underline-offset-4 hover:decoration-accent" target="_blank" rel="noopener noreferrer">@apalvarezvega</a>
+        </div>
+        <div>
+          <h3 class="font-semibold uppercase tracking-[0.16em] text-muted">Horario de atención</h3>
+          <p class="mt-2">Lunes a Viernes: 10am - 6pm<br />Fines de semana: Con cita previa</p>
         </div>
       </div>
+    </div>
+    <div class="border border-primary/60 bg-white p-6 shadow-xl sm:p-8 lg:col-span-8">
+      <%= live_render(@conn, AnartistaWeb.ContactLive, id: "contact-form") %>
     </div>
   </div>
 </section>

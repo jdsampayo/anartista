@@ -34,6 +34,15 @@
   height: 100%;
 }
 
+#about,
+#art,
+#mosaic,
+#writing,
+#exhibitions,
+#contact {
+  scroll-margin-top: 5rem;
+}
+
 /* Animation for hero content */
 @keyframes fadeIn {
   from {
