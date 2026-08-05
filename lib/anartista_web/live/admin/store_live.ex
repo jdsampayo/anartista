@@ -4,6 +4,8 @@ defmodule AnartistaWeb.Admin.StoreLive do
   alias Anartista.Store
   alias Anartista.Store.Piece
 
+  import AnartistaWeb.AdminComponents
+
   @accepted_photo_extensions ~w(.jpg .jpeg .png .webp)
 
   @impl true
@@ -113,7 +115,8 @@ defmodule AnartistaWeb.Admin.StoreLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <section class="bg-light px-4 py-28">
+    <.admin_navigation current={:store} />
+    <section class="bg-light px-4 py-16">
       <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start">
         <div>
           <div class="border-b border-primary/60 pb-6">

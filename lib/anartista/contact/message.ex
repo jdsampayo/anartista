@@ -7,6 +7,7 @@ defmodule Anartista.Contact.Message do
     field :email, :string
     field :subject, :string
     field :message, :string
+    field :read, :boolean, default: false
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule Anartista.Contact.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:name, :email, :subject, :message])
+    |> cast(attrs, [:name, :email, :subject, :message, :read])
     |> validate_required([:name, :email, :subject, :message])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "debe ser un email válido")
     |> validate_length(:message, min: 10, message: "debe tener al menos 10 caracteres")

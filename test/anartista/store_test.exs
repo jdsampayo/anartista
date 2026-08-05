@@ -30,6 +30,7 @@ defmodule Anartista.StoreTest do
     assert first_piece.category == "Artesanía"
     assert [latest_piece, _older_piece] = Store.list_pieces()
     assert latest_piece.id == second_piece.id
+    assert Store.latest_available_piece().id == second_piece.id
     assert ["Artesanía", "Piezas únicas"] == Store.list_categories()
 
     assert [{"Artesanía", [artisanal_piece]}, {"Piezas únicas", [unique_piece]}] =

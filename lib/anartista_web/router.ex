@@ -10,7 +10,7 @@ defmodule AnartistaWeb.Router do
     plug(:put_secure_browser_headers)
   end
 
-  pipeline :admin_auth do
+  pipeline :admin do
     plug(AnartistaWeb.Plugs.AdminBasicAuth)
   end
 
@@ -23,15 +23,17 @@ defmodule AnartistaWeb.Router do
 
     get("/", PageController, :home)
     get("/about", PageController, :about)
-    get("/art", PageController, :art)
+    get("/exhibitions", PageController, :exhibitions)
+    get("/writing", PageController, :writing)
     get("/contact", PageController, :contact)
     get("/store", PageController, :shop)
   end
 
   scope "/admin", AnartistaWeb.Admin do
-    pipe_through([:browser, :admin_auth])
+    pipe_through([:browser, :admin])
 
     live("/store", StoreLive, :index)
+    live("/messages", MessagesLive, :index)
   end
 
   scope "/", AnartistaWeb do

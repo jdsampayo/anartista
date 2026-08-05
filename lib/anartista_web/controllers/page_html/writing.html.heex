@@ -1,0 +1,20 @@
+<section class="bg-dark px-4 pb-16 pt-32 text-light sm:pb-20">
+  <div class="mx-auto max-w-6xl">
+    <h1 class="font-serif text-5xl leading-none sm:text-6xl">Escritos</h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-light/85">Notas y procesos que expanden la práctica más allá de la imagen terminada.</p>
+  </div>
+</section>
+
+<section class="bg-light px-4 py-16 sm:py-20">
+  <div :if={@substack_posts == []} class="mx-auto max-w-6xl border border-primary/60 bg-white px-6 py-16 text-center shadow-lg">
+    <p class="font-serif text-3xl text-dark">Los escritos no están disponibles en este momento.</p>
+    <a href="https://apalvarezvega.substack.com" target="_blank" rel="noopener noreferrer" class="mt-8 inline-flex min-h-11 items-center bg-primary px-6 py-2 font-semibold text-dark no-underline transition hover:bg-accent focus-visible:bg-accent">Visitar Substack</a>
+  </div>
+
+  <div :if={@substack_posts != []} class="mx-auto max-w-6xl">
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <.writing_card :for={post <- @substack_posts} post={post} />
+    </div>
+    <a href="https://apalvarezvega.substack.com" target="_blank" rel="noopener noreferrer" class="mt-12 inline-flex min-h-11 items-center border-2 border-dark px-6 py-2 font-semibold text-dark no-underline transition hover:border-primary hover:bg-primary focus-visible:border-primary focus-visible:bg-primary">Ver todos los escritos</a>
+  </div>
+</section>

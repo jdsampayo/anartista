@@ -17,7 +17,9 @@ defmodule Anartista.Contact do
 
   """
   def list_messages do
-    Repo.all(Message)
+    Message
+    |> order_by([message], desc: message.inserted_at, desc: message.id)
+    |> Repo.all()
   end
 
   @doc """
@@ -46,13 +48,22 @@ defmodule Anartista.Contact do
 
       iex> create_message(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def create_message(attrs \\ %{}) do
+    attrs = Map.drop(attrs, [:read, "read"])
+
     %Message{}
     |> Message.changeset(attrs)
     |> Repo.insert()
   end
+
+  def toggle_message_read(%Message{} = message) do
+    message
+    |> Message.changeset(%{read: !message.read})
+    |> Repo.update()
+  end
+
+  def delete_message(%Message{} = message), do: Repo.delete(message)
 
   @doc """
   Returns an empty changeset for the contact form.

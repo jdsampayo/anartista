@@ -29,6 +29,14 @@ defmodule Anartista.Store do
     |> Enum.sort_by(fn {category, _pieces} -> String.downcase(category) end)
   end
 
+  def latest_available_piece do
+    Piece
+    |> where([piece], piece.available)
+    |> order_by([piece], desc: piece.inserted_at, desc: piece.id)
+    |> limit(1)
+    |> Repo.one()
+  end
+
   def get_piece!(id), do: Repo.get!(Piece, id)
 
   def create_piece(attrs \\ %{}) do

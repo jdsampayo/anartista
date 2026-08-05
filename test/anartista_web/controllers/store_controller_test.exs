@@ -42,11 +42,11 @@ defmodule AnartistaWeb.StoreControllerTest do
     :ok
   end
 
-  test "GET /store renders available and sold pieces with the correct actions", %{conn: conn} do
+  test "GET / renders the storefront and /store redirects to its canonical route", %{conn: conn} do
     {:ok, _available_piece} = Store.create_piece(@available_attrs)
     {:ok, _sold_piece} = Store.create_piece(@sold_attrs)
 
-    html = conn |> get(~p"/store") |> html_response(200)
+    html = conn |> get(~p"/") |> html_response(200)
 
     assert html =~ "Collar disponible"
     assert html =~ "Aretes vendidos"
@@ -58,6 +58,9 @@ defmodule AnartistaWeb.StoreControllerTest do
     assert html =~ "2026"
     assert html =~ ~s(href="https://buy.stripe.com/available-piece")
     refute html =~ ~s(href="https://buy.stripe.com/sold-piece")
+
+    conn = get(conn, ~p"/store")
+    assert redirected_to(conn) == "/"
   end
 
   test "GET /admin/store challenges unauthenticated visitors", %{conn: conn} do
@@ -75,6 +78,7 @@ defmodule AnartistaWeb.StoreControllerTest do
 
     assert {:ok, _view, html} = live(conn, ~p"/admin/store")
     assert html =~ "Administrar tienda"
+    assert html =~ ~s(href="/admin/messages")
     assert html =~ "Agregar pieza"
     assert html =~ ~s(list="piece-categories")
     assert html =~ ~s(value="Stickers")

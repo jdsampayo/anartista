@@ -1,0 +1,73 @@
+<section class="bg-light px-4 pb-16 pt-32 sm:pb-20">
+  <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-12 lg:items-end">
+    <div class="lg:col-span-7">
+      <h1 class="max-w-3xl font-serif text-5xl leading-none text-dark sm:text-6xl">Acerca de Ana</h1>
+      <p class="mt-8 max-w-2xl font-serif text-2xl leading-snug text-dark">Una práctica multidisciplinaria donde los fragmentos, los materiales y la memoria vuelven a conversar.</p>
+    </div>
+    <figure class="border border-primary/50 bg-white p-3 shadow-xl lg:col-span-5">
+      <img
+        width="728"
+        height="970"
+        src={~p"/images/ana-studio.webp"}
+        alt="Ana trabajando en su estudio"
+        class="block w-full object-cover"
+        srcset={"#{~p"/images/ana-studio.webp"} 1x, #{~p"/images/ana-studio@2x.webp"} 2x"}
+      />
+      <figcaption class="border-t border-primary/50 pt-3 text-sm text-muted">Ana en el estudio</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="bg-dark px-4 py-16 text-light sm:py-20">
+  <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-12">
+    <h2 class="font-serif text-4xl leading-none lg:col-span-4 sm:text-5xl">Una práctica que ensambla.</h2>
+    <div class="max-w-prose space-y-6 text-lg leading-relaxed text-light/85 lg:col-span-8">
+      <p>Soy Ana, creadora multidisciplinar. Pinto, grabo, dibujo, esculpo y trabajo especialmente con mosaico: técnicas que me permiten reunir lo que parecía disperso y hacerlo convivir sin borrar sus diferencias.</p>
+      <p>En el mosaico encontré un lenguaje para romper y reconstruir. Las teselas de esmalte de porcelana, vidrio, cerámica, piedra y materiales recuperados conservan su singularidad mientras construyen una imagen común; allí se cruzan herencia cultural mexicana, materia y preguntas contemporáneas.</p>
+      <p>Mi trabajo no busca cerrar una interpretación. Propone mirar lo fragmentado como una posibilidad de relación, transformación y resistencia.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-dark px-4 py-16 text-light sm:py-20">
+  <div class="mx-auto max-w-6xl">
+    <h2 class="font-serif text-4xl leading-none sm:text-5xl">Obra seleccionada</h2>
+    <div class="mt-10 grid gap-x-8 gap-y-10 lg:grid-cols-12">
+      <.category_card
+        title="Mosaico"
+        description="Teselas de esmalte de porcelana, vidrio, cerámica, piedra y elementos recuperados que convierten la luz, el color y la textura en una superficie común."
+        image_name="mosaico"
+        layout="wide"
+      />
+      <.category_card
+        title="Pintura"
+        description="Exploraciones cromáticas y texturales que abren un diálogo con la luz, la profundidad y el entorno."
+        image_name="pintura"
+        layout="tall"
+      />
+      <.category_card
+        title="Grabado"
+        description="Series donde reproducción y unicidad se desplazan entre sí para cuestionar la imagen repetida."
+        image_name="grabado"
+        layout="tall"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="bg-accent/20 px-4 py-16 sm:py-20">
+  <div class="mx-auto grid max-w-6xl gap-8 border-y border-dark/25 py-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end">
+    <h2 class="font-serif text-4xl leading-none text-dark sm:text-5xl">La práctica también deja archivo.</h2>
+    <div class="flex flex-wrap gap-5">
+      <a href="/exhibitions" class="inline-flex min-h-11 items-center border-2 border-dark px-5 py-2 font-semibold text-dark no-underline transition hover:border-primary hover:bg-primary focus-visible:border-primary focus-visible:bg-primary">Exposiciones</a>
+      <a href="/writing" class="inline-flex min-h-11 items-center border-2 border-dark px-5 py-2 font-semibold text-dark no-underline transition hover:border-secondary hover:bg-secondary focus-visible:border-secondary focus-visible:bg-secondary">Escritos</a>
+    </div>
+  </div>
+</section>
+
+<section class="bg-light px-4 py-16 sm:py-20">
+  <div class="mx-auto grid max-w-6xl gap-8 border-y border-primary/60 py-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end">
+    <h2 class="font-serif text-4xl leading-none text-dark sm:text-5xl">Abramos una conversación.</h2>
+    <a href="/contact" class="inline-flex min-h-11 items-center justify-center bg-primary px-6 py-2 font-semibold text-dark no-underline transition hover:bg-accent focus-visible:bg-accent">Contacto</a>
+  </div>
+</section>
