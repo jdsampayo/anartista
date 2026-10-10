@@ -8,7 +8,9 @@ defmodule AnartistaWeb.Endpoint do
     store: :cookie,
     key: "_anartista_key",
     signing_salt: "yb1CDisM",
-    same_site: "Lax"
+    same_site: "Lax",
+    http_only: true,
+    secure: Application.compile_env(:anartista, :secure_session_cookie, false)
   ]
 
   socket "/live", Phoenix.LiveView.Socket,

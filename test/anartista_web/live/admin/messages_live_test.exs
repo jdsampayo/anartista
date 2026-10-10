@@ -3,7 +3,7 @@ defmodule AnartistaWeb.Admin.MessagesLiveTest do
 
   import Phoenix.LiveViewTest
 
-  alias Anartista.Contact
+  alias Anartista.{Accounts, Contact}
 
   @message_attrs %{
     name: "Ana Pérez",
@@ -13,36 +13,20 @@ defmodule AnartistaWeb.Admin.MessagesLiveTest do
     read: false
   }
 
-  setup do
-    original_user = System.get_env("ADMIN_USER")
-    original_password = System.get_env("ADMIN_PASS")
-    System.put_env("ADMIN_USER", "admin")
-    System.put_env("ADMIN_PASS", "secret")
-
-    on_exit(fn ->
-      restore_env("ADMIN_USER", original_user)
-      restore_env("ADMIN_PASS", original_password)
-    end)
-
-    :ok
-  end
-
-  test "GET /admin/messages challenges unauthenticated visitors", %{conn: conn} do
+  test "GET /admin/messages redirects unauthenticated visitors to login", %{conn: conn} do
     conn = get(conn, ~p"/admin/messages")
 
-    assert response(conn, 401)
-    assert [auth_header] = get_resp_header(conn, "www-authenticate")
-    assert auth_header =~ "Basic"
+    assert redirected_to(conn) == "/admin/login"
+    assert get_session(conn, :user_return_to) == "/admin/messages"
+    assert get_resp_header(conn, "www-authenticate") == []
   end
 
   test "admin manages message read status and deletion", %{conn: conn} do
     {:ok, message} = Contact.create_message(@message_attrs)
 
-    conn = put_req_header(conn, "authorization", "Basic " <> Base.encode64("admin:secret"))
+    conn = register_and_log_in_user(conn)
 
     assert {:ok, view, html} = live(conn, ~p"/admin/messages")
-    assert html =~ "Mensajes"
-    assert html =~ ~s(href="/admin/store")
     assert html =~ "Consulta sobre mosaico"
     assert html =~ "No leído"
 
@@ -59,6 +43,16 @@ defmodule AnartistaWeb.Admin.MessagesLiveTest do
     refute render(view) =~ "Consulta sobre mosaico"
   end
 
-  defp restore_env(key, nil), do: System.delete_env(key)
-  defp restore_env(key, value), do: System.put_env(key, value)
+  test "revoking a session prevents a connected administrator from changing messages", %{conn: conn} do
+    {:ok, message} = Contact.create_message(@message_attrs)
+    conn = register_and_log_in_user(conn)
+    token = get_session(conn, :user_token)
+    assert {:ok, view, _html} = live(conn, ~p"/admin/messages")
+
+    :ok = Accounts.delete_user_session_token(token)
+    render_click(view, "toggle-read", %{"id" => message.id})
+
+    assert_redirect(view, "/admin/login")
+    refute Contact.get_message!(message.id).read
+  end
 end

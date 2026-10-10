@@ -8,27 +8,19 @@
 <section class="bg-light px-4 py-16 sm:py-20">
   <div class="mx-auto max-w-6xl">
     <.exhibition_card
-      title="Universos Personales: Primera Exposición"
-      date="26 de marzo a 28 de abril 2025"
-      location="Ciudad de México"
-      opening="Inauguración a las 6pm"
-      image_name="universos-personales-2025"
-      image_alt="Universos Personales: Primera Exposición"
-      description="Muestra colectiva de estudiantes de La Esmeralda que exhibe obras de diversas disciplinas en el restaurante La Guarida del Diablo Panzón. Una iniciativa que promovió el talento emergente y la venta directa de obra."
-      link_url="https://www.esmeralda.edu.mx/_files/ugd/d50bce_b8566f0fe8154223bf11385f5e01df69.pdf"
-      link_text="Ver programa (PDF)"
+      :for={exhibition <- @exhibitions}
+      title={exhibition.title}
+      subtitle={exhibition.subtitle}
+      date={exhibition.date}
+      location={exhibition.location}
+      opening={exhibition.opening}
+      photo={exhibition.photo}
+      image_alt={exhibition.image_alt}
+      description={exhibition.description}
+      link_url={exhibition.link_url}
+      link_text={exhibition.link_text}
     />
-    <.exhibition_card
-      title="Mujeres Creadoras 2025: Cuidados"
-      date="22 y 23 de marzo 2025"
-      location="Ciudad de México"
-      opening="Inicia a las 9am"
-      image_name="mujeres-creadoras-2025"
-      image_alt="Mujeres Creadoras 2025: Cuidados"
-      description="Exposición que abordó los cuidados desde múltiples dimensiones y narrativas: arte, política, encuentro y compartición."
-      link_url="https://www.mujerescreadoras.org/"
-      link_text="Visitar Mujeres Creadoras"
-    />
+    <p :if={@exhibitions == []} class="text-muted">Aún no hay exposiciones en el archivo.</p>
   </div>
 </section>
 

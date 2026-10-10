@@ -35,4 +35,15 @@ defmodule AnartistaWeb.ConnCase do
     Anartista.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
+
+  def register_and_log_in_user(conn) do
+    {:ok, user} =
+      Anartista.Accounts.create_user(%{
+        email: "admin-#{System.unique_integer([:positive])}@example.com",
+        password: "admin-test-password"
+      })
+
+    token = Anartista.Accounts.generate_user_session_token(user)
+    Plug.Test.init_test_session(conn, user_token: token)
+  end
 end
