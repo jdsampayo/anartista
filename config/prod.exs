@@ -7,6 +7,8 @@ import Config
 # before starting your production server.
 config :anartista, AnartistaWeb.Endpoint, cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :anartista, :secure_session_cookie, true
+
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: Anartista.Finch
 

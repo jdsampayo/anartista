@@ -62,9 +62,10 @@ const initLightbox = () => {
   // Add listeners to all images with the lightbox-trigger class
   const images = document.querySelectorAll('.lightbox-trigger');
   images.forEach(img => {
-    img.addEventListener('click', () => {
+    img.addEventListener('click', (event) => {
+      event.preventDefault();
       const imageSource = img.getAttribute('data-hires') || img.src;
-      openLightbox(imageSource, img.alt);
+      openLightbox(imageSource, img.getAttribute('data-caption') || img.alt);
     });
   });
 };

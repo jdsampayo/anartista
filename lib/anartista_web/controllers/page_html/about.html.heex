@@ -29,27 +29,17 @@
   </div>
 </section>
 
-<section class="bg-dark px-4 py-16 text-light sm:py-20">
+<section :if={@selected_artworks != []} id="selected-artworks" class="bg-dark px-4 py-16 text-light sm:py-20">
   <div class="mx-auto max-w-6xl">
-    <h2 class="font-serif text-4xl leading-none sm:text-5xl">Obra seleccionada</h2>
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <h2 class="font-serif text-4xl leading-none sm:text-5xl">Obra seleccionada</h2>
+      <a href={~p"/obra"} class="inline-flex min-h-11 items-center font-semibold text-light underline decoration-primary decoration-2 underline-offset-4 hover:decoration-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">Ver toda la obra</a>
+    </div>
     <div class="mt-10 grid gap-x-8 gap-y-10 lg:grid-cols-12">
-      <.category_card
-        title="Mosaico"
-        description="Teselas de esmalte de porcelana, vidrio, cerámica, piedra y elementos recuperados que convierten la luz, el color y la textura en una superficie común."
-        image_name="mosaico"
-        layout="wide"
-      />
-      <.category_card
-        title="Pintura"
-        description="Exploraciones cromáticas y texturales que abren un diálogo con la luz, la profundidad y el entorno."
-        image_name="pintura"
-        layout="tall"
-      />
-      <.category_card
-        title="Grabado"
-        description="Series donde reproducción y unicidad se desplazan entre sí para cuestionar la imagen repetida."
-        image_name="grabado"
-        layout="tall"
+      <.artwork_card
+        :for={{artwork, index} <- Enum.with_index(@selected_artworks)}
+        artwork={artwork}
+        layout={if index == 0, do: "wide", else: "tall"}
       />
     </div>
   </div>
@@ -59,6 +49,7 @@
   <div class="mx-auto grid max-w-6xl gap-8 border-y border-dark/25 py-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end">
     <h2 class="font-serif text-4xl leading-none text-dark sm:text-5xl">La práctica también deja archivo.</h2>
     <div class="flex flex-wrap gap-5">
+      <a href={~p"/obra"} class="inline-flex min-h-11 items-center border-2 border-dark px-5 py-2 font-semibold text-dark no-underline transition hover:border-primary hover:bg-primary focus-visible:border-primary focus-visible:bg-primary">Obra</a>
       <a href="/exhibitions" class="inline-flex min-h-11 items-center border-2 border-dark px-5 py-2 font-semibold text-dark no-underline transition hover:border-primary hover:bg-primary focus-visible:border-primary focus-visible:bg-primary">Exposiciones</a>
       <a href="/writing" class="inline-flex min-h-11 items-center border-2 border-dark px-5 py-2 font-semibold text-dark no-underline transition hover:border-secondary hover:bg-secondary focus-visible:border-secondary focus-visible:bg-secondary">Escritos</a>
     </div>

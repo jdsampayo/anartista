@@ -1,6 +1,8 @@
 defmodule AnartistaWeb.Router do
   use AnartistaWeb, :router
 
+  import AnartistaWeb.AdminAuth
+
   pipeline :browser do
     plug(:accepts, ["html"])
     plug(:fetch_session)
@@ -10,8 +12,13 @@ defmodule AnartistaWeb.Router do
     plug(:put_secure_browser_headers)
   end
 
+  pipeline :admin_session do
+    plug(:fetch_current_user)
+    plug(:prevent_caching)
+  end
+
   pipeline :admin do
-    plug(AnartistaWeb.Plugs.AdminBasicAuth)
+    plug(:require_authenticated_user)
   end
 
   pipeline :api do
@@ -23,6 +30,7 @@ defmodule AnartistaWeb.Router do
 
     get("/", PageController, :home)
     get("/about", PageController, :about)
+    get("/obra", PageController, :obra)
     get("/exhibitions", PageController, :exhibitions)
     get("/writing", PageController, :writing)
     get("/contact", PageController, :contact)
@@ -30,16 +38,24 @@ defmodule AnartistaWeb.Router do
   end
 
   scope "/admin", AnartistaWeb.Admin do
-    pipe_through([:browser, :admin])
+    pipe_through([:browser, :admin_session])
 
-    live("/store", StoreLive, :index)
-    live("/messages", MessagesLive, :index)
+    get("/login", SessionController, :new)
+    post("/login", SessionController, :create)
+    delete("/logout", SessionController, :delete)
   end
 
-  scope "/", AnartistaWeb do
-    pipe_through(:browser)
+  scope "/admin", AnartistaWeb.Admin do
+    pipe_through([:browser, :admin_session, :admin])
 
-    # get("/shop", PageController, :shop)
+    live_session :admin,
+      on_mount: [{AnartistaWeb.AdminAuth, :require_authenticated}] do
+      live("/", DashboardLive, :index)
+      live("/store", StoreLive, :index)
+      live("/messages", MessagesLive, :index)
+      live("/exhibitions", ExhibitionsLive, :index)
+      live("/obra", ArtworkLive, :index)
+    end
   end
 
   # Other scopes may use custom stacks.
@@ -49,11 +65,7 @@ defmodule AnartistaWeb.Router do
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:anartista, :dev_routes) do
-    # If you want to use the LiveDashboard in production, you should put
-    # it behind authentication and allow only admins to access it.
-    # If your application does not have an admins-only section yet,
-    # you can use Plug.BasicAuth to set up some basic authentication
-    # as long as you are also using SSL (which you should anyway).
+    # Production admin routes use session authentication; these tools are development-only.
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do

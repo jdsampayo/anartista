@@ -1,46 +1,84 @@
 defmodule AnartistaWeb.ArtComponents do
   use Phoenix.Component
 
-  attr(:title, :string, required: true)
-  attr(:description, :string, required: true)
-  attr(:image_name, :string, required: true)
-  attr(:layout, :string, default: "standard")
+  attr(:artwork, :map, required: true)
+  attr(:layout, :string, default: "record")
 
-  def category_card(assigns) do
+  def artwork_card(assigns) do
+    assigns =
+      assigns
+      |> assign(:image, artwork_image(assigns.artwork.photo))
+      |> assign(:details, artwork_details(assigns.artwork))
+
     ~H"""
     <article
+      id={"artwork-#{@artwork.id}"}
       class={[
-        "group border-t border-secondary/50 pt-4",
+        "min-w-0 border-t border-secondary/50 pt-4",
+        @layout == "record" && "grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-10",
         @layout == "wide" && "lg:col-span-7",
-        @layout == "tall" && "lg:col-span-5",
-        @layout == "compact" && "lg:col-span-4",
-        @layout == "broad" && "lg:col-span-8"
+        @layout == "tall" && "lg:col-span-5"
       ]}
     >
-      <div class="overflow-hidden bg-dark">
+      <a
+        href={@artwork.photo}
+        data-hires={@artwork.photo}
+        data-caption={@artwork.image_alt}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={"Ver imagen completa: #{@artwork.title}"}
+        class="lightbox-trigger block overflow-hidden bg-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
+      >
         <img
-          width="480"
-          height="256"
-          data-hires={"/images/portafolio/#{@image_name}.webp"}
-          src={"/images/portafolio/#{@image_name}_thumb.webp"}
-          srcset={"/images/portafolio/#{@image_name}_thumb.webp 1x, /images/portafolio/#{@image_name}_thumb@2x.webp 2x"}
-          alt={@title}
+          src={@image.src}
+          srcset={@image.srcset}
+          alt={@artwork.image_alt}
+          loading="lazy"
           class={[
-            "lightbox-trigger h-72 w-full object-cover transition duration-500 group-hover:scale-[1.03]",
-            @layout == "wide" && "lg:h-[30rem]",
-            @layout == "tall" && "lg:h-[30rem]",
-            @layout == "compact" && "lg:h-80",
-            @layout == "broad" && "lg:h-80"
+            "w-full object-contain",
+            @layout == "record" && "h-80 sm:h-[28rem] lg:h-[34rem]",
+            @layout != "record" && "h-72 lg:h-[30rem]"
           ]}
         />
-      </div>
-      <div class="grid gap-3 py-5 sm:grid-cols-[minmax(0,1fr)_2fr]">
-        <h3 class="font-serif text-3xl leading-none text-light"><%= @title %></h3>
-        <p class="max-w-prose text-sm leading-relaxed text-light/75"><%= @description %></p>
+      </a>
+      <div class="min-w-0 py-5">
+        <h3 class="break-words font-serif text-3xl leading-tight text-light">{@artwork.title}</h3>
+        <dl class="mt-5 grid gap-x-6 gap-y-3 text-sm leading-relaxed sm:grid-cols-2">
+          <div :for={{label, value} <- @details} class="min-w-0">
+            <dt class="font-semibold text-secondary">{label}</dt>
+            <dd class="mt-1 whitespace-pre-line break-words text-light">{value}</dd>
+          </div>
+        </dl>
+        <p :if={@artwork.description} class="mt-5 max-w-prose whitespace-pre-line break-words text-sm leading-relaxed text-light/85">{@artwork.description}</p>
       </div>
     </article>
     """
   end
+
+  defp artwork_details(artwork) do
+    [
+      {"Tipo", artwork.category},
+      {"Fecha", artwork.year},
+      {"Técnica", artwork.technique},
+      {"Materiales", artwork.materials},
+      {"Dimensiones", artwork.dimensions},
+      {"Edición", artwork.edition},
+      {"Colección / ubicación", artwork.collection}
+    ]
+    |> Enum.reject(fn {_label, value} -> is_nil(value) or value == "" end)
+  end
+
+  defp artwork_image("/images/portafolio/" <> filename) do
+    base = String.trim_trailing(filename, ".webp")
+
+    %{
+      src: "/images/portafolio/#{base}_thumb.webp",
+      srcset:
+        "/images/portafolio/#{base}_thumb.webp 1x, /images/portafolio/#{base}_thumb@2x.webp 2x"
+    }
+  end
+
+  defp artwork_image(photo), do: %{src: photo, srcset: nil}
 
   attr(:image_name, :string, required: true)
   attr(:description, :string, required: true)
@@ -68,23 +106,25 @@ defmodule AnartistaWeb.ArtComponents do
   attr(:subtitle, :string, default: nil)
   attr(:date, :string, required: true)
   attr(:location, :string, required: true)
-  attr(:opening, :string, required: true)
-  attr(:image_name, :string, required: true)
+  attr(:opening, :string, default: nil)
+  attr(:photo, :string, required: true)
   attr(:image_alt, :string, required: true)
   attr(:description, :string, required: true)
   attr(:link_url, :string, default: nil)
   attr(:link_text, :string, default: "Visitar sitio")
 
   def exhibition_card(assigns) do
+    assigns = assign(assigns, :image, exhibition_image(assigns.photo))
+
     ~H"""
     <div class="bg-white border border-accent/25 rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row mb-12">
       <div class="md:w-2/5 relative h-64 md:h-auto overflow-hidden">
         <img
           width="602"
           height="252"
-          data-hires={"/images/exposiciones/#{@image_name}.webp"}
-          src={"/images/exposiciones/#{@image_name}_thumb.webp"}
-          srcset={"/images/exposiciones/#{@image_name}_thumb.webp 1x, /images/exposiciones/#{@image_name}_thumb@2x.webp 2x"}
+          data-hires={@photo}
+          src={@image.src}
+          srcset={@image.srcset}
           alt={@image_alt}
           class="absolute inset-0 w-full h-full object-cover transition duration-500 hover:scale-110 lightbox-trigger"
         />
@@ -109,7 +149,7 @@ defmodule AnartistaWeb.ArtComponents do
               </svg>
               <%= @location %>
             </span>
-            <span class="flex items-center">
+            <span :if={@opening} class="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -132,6 +172,18 @@ defmodule AnartistaWeb.ArtComponents do
     </div>
     """
   end
+
+  defp exhibition_image("/images/exposiciones/" <> filename) do
+    base = String.trim_trailing(filename, ".webp")
+
+    %{
+      src: "/images/exposiciones/#{base}_thumb.webp",
+      srcset:
+        "/images/exposiciones/#{base}_thumb.webp 1x, /images/exposiciones/#{base}_thumb@2x.webp 2x"
+    }
+  end
+
+  defp exhibition_image(photo), do: %{src: photo, srcset: nil}
 
   attr(:post, :map, required: true)
 

@@ -1,0 +1,45 @@
+<section class="bg-dark px-4 pb-16 pt-32 text-light sm:pb-20">
+  <div class="mx-auto max-w-6xl">
+    <h1 class="font-serif text-5xl leading-none sm:text-6xl">Obra</h1>
+    <nav class="mt-8 flex flex-wrap gap-3" aria-label="Filtrar obra por tipo">
+      <a
+        href={~p"/obra"}
+        aria-current={if @current_category in [nil, ""], do: "page"}
+        class={[
+          "inline-flex min-h-11 items-center border px-4 py-2 font-semibold no-underline transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary",
+          @current_category in [nil, ""] && "border-primary bg-primary text-dark",
+          @current_category not in [nil, ""] && "border-secondary/60 text-light hover:bg-secondary hover:text-dark"
+        ]}
+      >
+        Toda la obra
+      </a>
+      <a
+        :for={category <- @categories}
+        href={~p"/obra?#{[type: category]}"}
+        aria-current={if @current_category == category, do: "page"}
+        class={[
+          "inline-flex min-h-11 min-w-0 max-w-full items-center break-words border px-4 py-2 font-semibold no-underline transition [overflow-wrap:anywhere] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary",
+          @current_category == category && "border-primary bg-primary text-dark",
+          @current_category != category && "border-secondary/60 text-light hover:bg-secondary hover:text-dark"
+        ]}
+      >
+        {category}
+      </a>
+    </nav>
+
+    <p :if={@artworks_by_category == []} class="mt-12 text-light/85">
+      {if @current_category in [nil, ""], do: "Aún no hay obra publicada.", else: "No hay obra publicada de este tipo. Elige otro filtro o consulta toda la obra."}
+    </p>
+
+    <section
+      :for={{{category, artworks}, index} <- Enum.with_index(@artworks_by_category)}
+      aria-labelledby={"artwork-type-#{index}"}
+      class="mt-16 sm:mt-20"
+    >
+      <h2 id={"artwork-type-#{index}"} class="break-words font-serif text-4xl leading-none sm:text-5xl">{category}</h2>
+      <div class="mt-8 space-y-10">
+        <.artwork_card :for={artwork <- artworks} artwork={artwork} />
+      </div>
+    </section>
+  </div>
+</section>

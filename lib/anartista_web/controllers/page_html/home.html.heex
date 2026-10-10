@@ -1,6 +1,5 @@
-<section :if={@featured_piece} class="relative isolate overflow-hidden bg-dark px-4 pb-16 pt-28 text-light sm:pb-20 sm:pt-36">
-  <div class="mosaic-container opacity-35" id="mosaic-animation" data-background-src={~p"/images/background.webp"}></div>
-  <div class="relative z-10 mx-auto max-w-6xl">
+<section :if={@featured_piece} class="bg-dark px-4 pb-16 pt-28 text-light sm:pb-20 sm:pt-36">
+  <div class="mx-auto max-w-6xl">
     <.featured_piece piece={@featured_piece} />
   </div>
 </section>
