@@ -2,8 +2,8 @@
   <div class="mx-auto max-w-6xl">
     <h1 class="font-serif text-5xl leading-none sm:text-6xl">Obra</h1>
     <nav class="mt-8 flex flex-wrap gap-3" aria-label="Filtrar obra por tipo">
-      <a
-        href={~p"/obra"}
+      <.link
+        patch={~p"/obra"}
         aria-current={if @current_category in [nil, ""], do: "page"}
         class={[
           "inline-flex min-h-11 items-center border px-4 py-2 font-semibold no-underline transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary",
@@ -12,10 +12,10 @@
         ]}
       >
         Toda la obra
-      </a>
-      <a
+      </.link>
+      <.link
         :for={category <- @categories}
-        href={~p"/obra?#{[type: category]}"}
+        patch={~p"/obra?#{[type: category]}"}
         aria-current={if @current_category == category, do: "page"}
         class={[
           "inline-flex min-h-11 min-w-0 max-w-full items-center break-words border px-4 py-2 font-semibold no-underline transition [overflow-wrap:anywhere] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary",
@@ -24,7 +24,7 @@
         ]}
       >
         {category}
-      </a>
+      </.link>
     </nav>
 
     <p :if={@artworks_by_category == []} class="mt-12 text-light/85">

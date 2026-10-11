@@ -64,6 +64,17 @@ defmodule AnartistaWeb.AdminComponents do
           >
             Obra
           </a>
+          <a
+            href="/admin/exhibit"
+            aria-current={if @current == :exhibit, do: "page"}
+            class={[
+              "inline-flex min-h-11 items-center px-3 text-sm font-semibold no-underline transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light",
+              @current == :exhibit && "bg-primary text-dark",
+              @current != :exhibit && "text-light hover:bg-light hover:text-dark"
+            ]}
+          >
+            Exhibit
+          </a>
           <.form for={%{}} action="/admin/logout" method="delete">
             <button type="submit" class="min-h-11 border border-light/60 px-3 text-sm font-semibold text-light transition hover:bg-light hover:text-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-light">
               Cerrar sesión

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="720" viewBox="0 0 840 720">
+  <defs>
+    <filter id="stone" x="0" y="0" width="840" height="720" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency=".018 .055" numOctaves="3" seed="9" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="840" height="720" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="2" seed="21" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+  <rect width="840" height="720" fill="#d8cbb8"/>
+  <g>
+    <path d="M0 0h280v240H0Z" fill="#dfd3c2"/>
+    <path d="M280 0h280v240H280Z" fill="#d9cdba"/>
+    <path d="M560 0h280v240H560Z" fill="#ddd0bd"/>
+    <path d="M0 240h140v240H0Z" fill="#dbcfbe"/>
+    <path d="M140 240h280v240H140Z" fill="#e0d4c4"/>
+    <path d="M420 240h280v240H420Z" fill="#dcd0bf"/>
+    <path d="M700 240h140v240H700Z" fill="#dbcfbe"/>
+    <path d="M0 480h280v240H0Z" fill="#ddd1c0"/>
+    <path d="M280 480h280v240H280Z" fill="#ded2c1"/>
+    <path d="M560 480h280v240H560Z" fill="#d9cebc"/>
+  </g>
+  <rect width="840" height="720" filter="url(#stone)" opacity=".085"/>
+  <rect width="840" height="720" filter="url(#grain)" opacity=".055"/>
+  <g fill="none" stroke="#b6a994" stroke-width=".9" opacity=".6">
+    <path d="M0 .5h840M0 240h840M0 480h840M.5 0v720M280 0v240M560 0v240M140 240v240M420 240v240M700 240v240M280 480v240M560 480v240"/>
+  </g>
+  <g fill="none" stroke="#f3e9da" stroke-width=".7" opacity=".65">
+    <path d="M1.5 1.5h838M1 241h839M1 481h839M1.5 1v719M281 1v238M561 1v238M141 241v238M421 241v238M701 241v238M281 481v239M561 481v239"/>
+  </g>
+</svg>

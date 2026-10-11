@@ -41,6 +41,7 @@ defmodule AnartistaWeb.AdminSessionControllerTest do
           ~p"/admin/store",
           ~p"/admin/messages",
           ~p"/admin/exhibitions",
+          ~p"/admin/exhibit",
           ~p"/admin/obra"
         ] do
       conn =
@@ -75,6 +76,8 @@ defmodule AnartistaWeb.AdminSessionControllerTest do
           "/admin/exhibitions/../store",
           "/admin/obra?next=https://example.com",
           "/admin/obra/../store",
+          "/admin/exhibit?next=https://example.com",
+          "/admin/exhibit/../store",
           "/admin/"
         ] do
       conn =
@@ -197,6 +200,7 @@ defmodule AnartistaWeb.AdminSessionControllerTest do
           ~p"/admin/store",
           ~p"/admin/messages",
           ~p"/admin/exhibitions",
+          ~p"/admin/exhibit",
           ~p"/admin/obra"
         ] do
       token = Accounts.generate_user_session_token(user)

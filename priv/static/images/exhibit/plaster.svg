@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+  <defs>
+    <filter id="grain" x="0" y="0" width="320" height="320" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="2" seed="12" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="plaster" x="0" y="0" width="320" height="320" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency=".045 .07" numOctaves="3" seed="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+  <rect width="320" height="320" filter="url(#plaster)" opacity=".035"/>
+  <rect width="320" height="320" filter="url(#grain)" opacity=".085"/>
+</svg>

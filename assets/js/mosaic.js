@@ -3,26 +3,65 @@ import MosaicPlugin from "../vendor/mosaic-plugin.js";
 const MAX_RENDER_PIXELS = 8_000_000;
 const MOSAIC_SEED = 20_250_802;
 
-let hasAnimated = false;
-let activeAnimation = null;
-let renderVersion = 0;
-let resizeTimer = null;
-let sourceImagePromise = null;
-const loadSourceImage = (sourceUrl) => {
-  if (sourceImagePromise) return sourceImagePromise;
+const sourceImagePromises = new Map();
 
-  sourceImagePromise = new Promise((resolve, reject) => {
-    const image = new Image();
-    image.decoding = "async";
-    image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error(`Could not load ${sourceUrl}`));
-    image.src = sourceUrl;
+const loadSourceImage = (sourceUrl, signal) => {
+  signal.throwIfAborted();
 
-    if (image.complete && image.naturalWidth > 0) resolve(image);
+  if (!sourceImagePromises.has(sourceUrl)) {
+    sourceImagePromises.set(sourceUrl, new Promise((resolve, reject) => {
+      const image = new Image();
+      image.decoding = "async";
+      image.onload = () => resolve(image);
+      image.onerror = () => reject(new Error(`Could not load ${sourceUrl}`));
+      image.src = sourceUrl;
+
+      if (image.complete && image.naturalWidth > 0) resolve(image);
+    }));
+  }
+
+  // Cancel this element's wait without discarding the reusable decoded image.
+  return new Promise((resolve, reject) => {
+    const abort = () => reject(signal.reason);
+    signal.addEventListener("abort", abort, { once: true });
+    sourceImagePromises.get(sourceUrl).then(
+      (image) => {
+        signal.removeEventListener("abort", abort);
+        resolve(image);
+      },
+      (error) => {
+        signal.removeEventListener("abort", abort);
+        reject(error);
+      }
+    );
   });
-
-  return sourceImagePromise;
 };
+
+// The vendored render/animate API has no AbortSignal; its cooperative _yield
+// boundary lets a destroyed hook stop generation without changing the algorithm.
+class LifecycleMosaicPlugin extends MosaicPlugin {
+  constructor(options, signal) {
+    super(options);
+    this.signal = signal;
+  }
+
+  _yield() {
+    const signal = this.signal;
+    signal.throwIfAborted();
+
+    return new Promise((resolve, reject) => {
+      const abort = () => {
+        clearTimeout(timer);
+        reject(signal.reason);
+      };
+      const timer = setTimeout(() => {
+        signal.removeEventListener("abort", abort);
+        resolve();
+      }, 0);
+      signal.addEventListener("abort", abort, { once: true });
+    });
+  }
+}
 
 const createCoverCanvas = (image, width, height) => {
   const deviceScale = Math.min(window.devicePixelRatio || 1, 2);
@@ -54,31 +93,26 @@ const createCoverCanvas = (image, width, height) => {
   return { canvas, pixelScale };
 };
 
-const renderMosaic = async () => {
-  if (hasAnimated) return;
-
-  const container = document.getElementById("mosaic-animation");
-  if (!container) return;
+const renderMosaic = async (hook) => {
+  const container = hook.el;
+  const signal = hook.abortController.signal;
+  if (signal.aborted || hook.hasAnimated) return;
 
   const sourceUrl = container.dataset.backgroundSrc;
   if (!sourceUrl) return;
 
-  const version = ++renderVersion;
+  const version = ++hook.renderVersion;
   const { width, height } = container.getBoundingClientRect();
   if (width < 1 || height < 1) return;
-  hasAnimated = true;
-
-
-  activeAnimation?.cancel();
-  activeAnimation = null;
+  hook.hasAnimated = true;
 
   try {
-    const image = await loadSourceImage(sourceUrl);
-    if (version !== renderVersion) return;
+    const image = await loadSourceImage(sourceUrl, signal);
+    if (signal.aborted || version !== hook.renderVersion || !container.isConnected) return;
 
     const { canvas: sourceCanvas, pixelScale } = createCoverCanvas(image, width, height);
     const areaScale = pixelScale * pixelScale;
-    const mosaic = new MosaicPlugin({
+    const mosaic = new LifecycleMosaicPlugin({
       image: sourceCanvas,
       algorithm: "stained-glass",
       edgeStrength: 0.5,
@@ -91,7 +125,7 @@ const renderMosaic = async () => {
       borderWidth: 1,
       seed: MOSAIC_SEED,
       yieldEveryMs: 10
-    });
+    }, signal);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const animation = await mosaic.animate({
       duration: 2_400,
@@ -101,7 +135,7 @@ const renderMosaic = async () => {
       seed: MOSAIC_SEED
     });
 
-    if (version !== renderVersion) {
+    if (signal.aborted || version !== hook.renderVersion || !container.isConnected) {
       animation.cancel();
       return;
     }
@@ -109,32 +143,58 @@ const renderMosaic = async () => {
     animation.canvas.className = "hero-mosaic-canvas";
     animation.canvas.setAttribute("aria-hidden", "true");
     container.replaceChildren(animation.canvas);
-    activeAnimation = animation;
+    hook.activeAnimation = animation;
 
     if (reducedMotion) {
       animation.seek(1);
       return;
     }
 
-    requestAnimationFrame(() => {
-      if (version === renderVersion) animation.play().catch(console.warn);
+    hook.animationFrame = requestAnimationFrame(() => {
+      hook.animationFrame = null;
+      if (!signal.aborted && version === hook.renderVersion) {
+        animation.play().catch((error) => {
+          if (!signal.aborted && version === hook.renderVersion) console.warn(error);
+        });
+      }
     });
   } catch (error) {
-    if (version === renderVersion) {
+    if (!signal.aborted && version === hook.renderVersion && container.isConnected) {
       container.replaceChildren();
       console.warn("Hero mosaic could not be rendered.", error);
     }
   }
 };
 
-const scheduleRender = () => {
-  if (hasAnimated) return;
+export const Mosaic = {
+  mounted() {
+    this.abortController = new AbortController();
+    this.hasAnimated = false;
+    this.activeAnimation = null;
+    this.renderVersion = 0;
+    this.resizeTimer = null;
+    this.animationFrame = null;
+    this.scheduleRender = () => {
+      if (this.hasAnimated) return;
 
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(renderMosaic, 250);
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
+        this.resizeTimer = null;
+        renderMosaic(this);
+      }, 250);
+    };
+
+    window.addEventListener("resize", this.scheduleRender);
+    renderMosaic(this);
+  },
+
+  destroyed() {
+    this.abortController.abort();
+    this.renderVersion++;
+    clearTimeout(this.resizeTimer);
+    if (this.animationFrame !== null) cancelAnimationFrame(this.animationFrame);
+    this.activeAnimation?.cancel();
+    this.activeAnimation = null;
+    window.removeEventListener("resize", this.scheduleRender);
+  }
 };
-
-document.addEventListener("DOMContentLoaded", renderMosaic);
-window.addEventListener("resize", scheduleRender);
-
-export default { renderMosaic };
