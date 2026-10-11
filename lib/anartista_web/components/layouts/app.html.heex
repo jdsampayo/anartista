@@ -1,16 +1,18 @@
-<header class="bg-light fixed top-0 z-50 w-full border-b border-primary py-4 backdrop-blur-lg bg-opacity-80 sm:py-5">
+<% navigation_mode = if assigns[:public_page], do: :patch, else: :navigate %>
+<header :if={assigns[:live_action] != :exhibit} class="bg-light fixed top-0 z-50 w-full border-b border-primary py-4 backdrop-blur-lg bg-opacity-80 sm:py-5">
   <div class="container mx-auto flex items-center justify-between gap-4 px-4">
-    <a href="/" class="font-serif text-3xl font-bold text-light no-underline gradient-text sm:text-4xl">
+    <.link {%{navigation_mode => ~p"/"}} class="font-serif text-3xl font-bold text-light no-underline gradient-text sm:text-4xl">
       <span class="text-primary">An</span><span class="split">A</span><span class="text-dark">rtista</span>
-    </a>
+    </.link>
     <nav class="hidden lg:block" aria-label="Navegación principal">
       <ul class="flex">
-        <li class="ml-6"><a href="/" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Tienda</a></li>
-        <li class="ml-6"><a href="/about" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Acerca de</a></li>
-        <li class="ml-6"><a href="/obra" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Obra</a></li>
-        <li class="ml-6"><a href="/exhibitions" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Exposiciones</a></li>
-        <li class="ml-6"><a href="/writing" class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Escritos</a></li>
-        <li class="ml-6"><a href="/contact" class="inline-flex rounded-sm bg-primary px-3 py-1 text-dark no-underline font-semibold transition duration-300 hover:bg-accent focus-visible:bg-accent">Contacto</a></li>
+        <li class="ml-6"><.link {%{navigation_mode => ~p"/"}} class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Tienda</.link></li>
+        <li class="ml-6"><.link {%{navigation_mode => ~p"/about"}} class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Acerca de</.link></li>
+        <li class="ml-6"><.link {%{navigation_mode => ~p"/obra"}} class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Obra</.link></li>
+        <li class="ml-6"><.link {%{navigation_mode => ~p"/exhibit"}} class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Exhibit</.link></li>
+        <li class="ml-6"><.link {%{navigation_mode => ~p"/exhibitions"}} class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Exposiciones</.link></li>
+        <li class="ml-6"><.link {%{navigation_mode => ~p"/writing"}} class="inline-flex rounded-sm px-2 py-1 text-dark no-underline font-medium transition duration-300 hover:bg-primary focus-visible:bg-primary">Escritos</.link></li>
+        <li class="ml-6"><.link {%{navigation_mode => ~p"/contact"}} class="inline-flex rounded-sm bg-primary px-3 py-1 text-dark no-underline font-semibold transition duration-300 hover:bg-accent focus-visible:bg-accent">Contacto</.link></li>
       </ul>
     </nav>
     <details class="relative lg:hidden">
@@ -19,12 +21,13 @@
       </summary>
       <nav class="absolute right-0 mt-3 w-64 border border-primary bg-light p-2 shadow-lg" aria-label="Navegación móvil">
         <ul class="space-y-1">
-          <li><a href="/" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Tienda</a></li>
-          <li><a href="/about" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Acerca de</a></li>
-          <li><a href="/obra" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Obra</a></li>
-          <li><a href="/exhibitions" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Exposiciones</a></li>
-          <li><a href="/writing" class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Escritos</a></li>
-          <li><a href="/contact" class="block min-h-11 bg-primary px-3 py-2 font-semibold text-dark no-underline transition hover:bg-accent focus-visible:bg-accent">Contacto</a></li>
+          <li><.link {%{navigation_mode => ~p"/"}} class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Tienda</.link></li>
+          <li><.link {%{navigation_mode => ~p"/about"}} class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Acerca de</.link></li>
+          <li><.link {%{navigation_mode => ~p"/obra"}} class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Obra</.link></li>
+          <li><.link {%{navigation_mode => ~p"/exhibit"}} class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Exhibit</.link></li>
+          <li><.link {%{navigation_mode => ~p"/exhibitions"}} class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Exposiciones</.link></li>
+          <li><.link {%{navigation_mode => ~p"/writing"}} class="block min-h-11 px-3 py-2 font-medium text-dark no-underline transition hover:bg-secondary focus-visible:bg-secondary">Escritos</.link></li>
+          <li><.link {%{navigation_mode => ~p"/contact"}} class="block min-h-11 bg-primary px-3 py-2 font-semibold text-dark no-underline transition hover:bg-accent focus-visible:bg-accent">Contacto</.link></li>
         </ul>
       </nav>
     </details>
@@ -35,7 +38,7 @@
   <%= @inner_content %>
 </main>
 
-<footer class="bg-dark text-light py-8 text-center">
+<footer :if={assigns[:live_action] != :exhibit} class="bg-dark text-light py-8 text-center">
   <div class="container mx-auto px-4">
     <p class="mb-5">© {DateTime.utc_now.year} Anartista. Todos los derechos reservados.</p>
     <div class="flex justify-center gap-5 mb-5">

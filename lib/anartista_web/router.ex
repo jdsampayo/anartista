@@ -28,12 +28,16 @@ defmodule AnartistaWeb.Router do
   scope "/", AnartistaWeb do
     pipe_through(:browser)
 
-    get("/", PageController, :home)
-    get("/about", PageController, :about)
-    get("/obra", PageController, :obra)
-    get("/exhibitions", PageController, :exhibitions)
-    get("/writing", PageController, :writing)
-    get("/contact", PageController, :contact)
+    live_session :public do
+      live("/", PageLive, :home)
+      live("/about", PageLive, :about)
+      live("/obra", PageLive, :obra)
+      live("/exhibit", PageLive, :exhibit)
+      live("/exhibitions", PageLive, :exhibitions)
+      live("/writing", PageLive, :writing)
+      live("/contact", PageLive, :contact)
+    end
+
     get("/store", PageController, :shop)
   end
 
@@ -55,6 +59,7 @@ defmodule AnartistaWeb.Router do
       live("/messages", MessagesLive, :index)
       live("/exhibitions", ExhibitionsLive, :index)
       live("/obra", ArtworkLive, :index)
+      live("/exhibit", ExhibitLive, :index)
     end
   end
 

@@ -95,6 +95,7 @@ defmodule AnartistaWeb.AdminAuth do
               "/admin/store",
               "/admin/messages",
               "/admin/exhibitions",
+              "/admin/exhibit",
               "/admin/obra"
             ],
        do: path

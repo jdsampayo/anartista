@@ -33,9 +33,9 @@
     <div :if={@pieces_by_category == []} class="border border-primary/60 bg-white px-6 py-16 text-center shadow-lg">
       <h1 :if={@featured_piece} class="font-serif text-3xl text-dark">Tienda</h1>
       <p class={["font-serif text-3xl text-dark", @featured_piece && "mt-5"]}>No hay piezas publicadas en este momento.</p>
-      <a href="/about" class="mt-8 inline-flex min-h-11 items-center bg-primary px-6 py-2 font-semibold text-dark no-underline transition hover:bg-accent focus-visible:bg-accent">
+      <.link patch={~p"/about"} class="mt-8 inline-flex min-h-11 items-center bg-primary px-6 py-2 font-semibold text-dark no-underline transition hover:bg-accent focus-visible:bg-accent">
         Conocer a Ana
-      </a>
+      </.link>
     </div>
 
     <div :if={@pieces_by_category != []} class="space-y-16 pt-16 sm:space-y-20 sm:pt-20">
@@ -58,9 +58,9 @@
     <h2 class="font-serif text-4xl leading-none text-dark sm:text-5xl">La obra continúa en el estudio.</h2>
     <div>
       <p class="text-lg leading-relaxed text-dark/85">Conoce la práctica, los materiales y los procesos que atraviesan cada pieza.</p>
-      <a href="/about" class="mt-6 inline-flex min-h-11 items-center border-2 border-dark px-6 py-2 font-semibold text-dark no-underline transition hover:border-primary hover:bg-primary focus-visible:border-primary focus-visible:bg-primary">
+      <.link patch={~p"/about"} class="mt-6 inline-flex min-h-11 items-center border-2 border-dark px-6 py-2 font-semibold text-dark no-underline transition hover:border-primary hover:bg-primary focus-visible:border-primary focus-visible:bg-primary">
         Acerca de Ana
-      </a>
+      </.link>
     </div>
   </div>
 </section>

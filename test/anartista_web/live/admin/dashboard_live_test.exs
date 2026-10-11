@@ -13,7 +13,13 @@ defmodule AnartistaWeb.Admin.DashboardLiveTest do
   test "dashboard links open each protected administration area", %{conn: conn} do
     conn = register_and_log_in_user(conn)
 
-    for path <- [~p"/admin/messages", ~p"/admin/store", ~p"/admin/exhibitions", ~p"/admin/obra"] do
+    for path <- [
+          ~p"/admin/messages",
+          ~p"/admin/store",
+          ~p"/admin/exhibitions",
+          ~p"/admin/obra",
+          ~p"/admin/exhibit"
+        ] do
       assert {:ok, view, _html} = live(conn, ~p"/admin")
 
       assert {:ok, _area_view, _html} =

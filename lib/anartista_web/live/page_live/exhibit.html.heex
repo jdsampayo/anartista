@@ -1,0 +1,20 @@
+<section id="exhibit-page" class="exhibit-page bg-light text-dark" aria-label="Exhibit">
+  <header class="exhibit-heading">
+    <div class="exhibit-heading-title">
+      <h1 class="font-serif">Exhibit</h1>
+      <span>Ana Alvarez Vega</span>
+    </div>
+    <div class="exhibit-heading-actions">
+      <details class="exhibit-filter-menu">
+        <summary>{if @current_category in [nil, ""], do: "Toda la obra", else: @current_category}</summary>
+        <nav aria-label="Filtrar obra por tipo">
+          <.link patch={~p"/exhibit"} aria-current={if @current_category in [nil, ""], do: "page"} class={["exhibit-filter", @current_category in [nil, ""] && "exhibit-filter-active"]}>Toda la obra</.link>
+          <.link :for={category <- @categories} patch={~p"/exhibit?#{[type: category]}"} aria-current={if @current_category == category, do: "page"} class={["exhibit-filter", @current_category == category && "exhibit-filter-active"]}>{category}</.link>
+        </nav>
+      </details>
+      <.link patch={~p"/"} class="exhibit-exit" aria-label="Salir de Exhibit">Salir</.link>
+    </div>
+  </header>
+  <p :if={@rooms == []} class="exhibit-empty">{if @current_category in [nil, ""], do: "Aún no hay salas publicadas.", else: "No hay obra publicada de este tipo. Elige otro filtro o consulta toda la obra."}</p>
+  <.exhibit_gallery rooms={@rooms} />
+</section>
